@@ -1,7 +1,13 @@
-﻿@{
+﻿@model PortfolioMVC.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
-
+<style>
+        .card:hover {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+</style>
 <section class="text-center p-5 bg-dark text-white">
     <h1>Hello, I'm Nikhil Gupta</h1>
     <p>Full Stack .NET Developer</p>
@@ -14,21 +20,35 @@
 
 <section id="skills" class="mt-5">
     <h2>Skills</h2>
-    <ul>
-        <li>C#</li>
-        <li>ASP.NET</li>
-        <li>SQL</li>
-        <li>JavaScript</li>
-    </ul>
+    <div class="row">
+        @foreach (var skill in Model.Skills)
+        {
+            <div class="col-md-3 mb-2">
+                <div class="card p-2 text-center">
+                    @skill.Name
+                </div>
+            </div>
+        }
+    </div>
 </section>
 
 <section id="projects" class="mt-5">
     <h2>Projects</h2>
-    <p>Blast Furnace Monitoring System</p>
-    <p>Liquid Level Monitoring System</p>
+    <div class="row">
+        @foreach (var project in Model.Projects)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card p-3 shadow">
+                    <h5>@project.Title</h5>
+                    <p>@project.Description</p>
+                    <small><b>Tech:</b> @project.Technologies</small>
+                </div>
+            </div>
+        }
+    </div>
 </section>
 
 <section id="contact" class="mt-5 mb-5">
     <h2>Contact</h2>
-    <p>Email: yourmail@gmail.com</p>
+    <p>Email: nikhilkumarguptankg0657@gmail.com</p>
 </section>
