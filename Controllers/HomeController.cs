@@ -45,6 +45,28 @@ namespace PortfolioMVC.Controllers
 
             return View(vm);
         }
+        public IActionResult Details(int id)
+        {
+            var projects = new List<Project>
+            {
+                new Project {
+                    Id = 1,
+                    Title = "Blast Furnace Monitoring System",
+                    Description = "Real-time monitoring system using ASP.NET, WCF, and ADO.NET",
+                    Technologies = "ASP.NET, WCF, SQL Server"
+                },
+                new Project {
+                    Id = 2,
+                    Title = "Liquid Level Monitoring System",
+                    Description = "Industrial monitoring system using sensors and OPC integration",
+                    Technologies = "C#, OPC, SQL"
+                }
+            };
+
+            var project = projects.FirstOrDefault(p => p.Id == id);
+
+            return View(project);
+        }
 
         public IActionResult Privacy()
         {
