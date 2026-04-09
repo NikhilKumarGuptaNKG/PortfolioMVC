@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PortfolioMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Nikhil Gupta</a>
+            <div>
+                <a class="nav-link d-inline text-white" href="#about">About</a>
+                <a class="nav-link d-inline text-white" href="#skills">Skills</a>
+                <a class="nav-link d-inline text-white" href="#projects">Projects</a>
+                <a class="nav-link d-inline text-white" href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <footer class="text-center mt-5 p-3 bg-light">
+        © 2026 Nikhil Gupta
+    </footer>
+</body>
+</html>
