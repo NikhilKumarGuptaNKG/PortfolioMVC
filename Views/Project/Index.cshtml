@@ -2,7 +2,10 @@
 
 <h2>Projects</h2>
 
-<a href="/Project/Create" class="btn btn-primary">Add Project</a>
+@if (User.IsInRole("Admin"))
+{
+    <a href="/Project/Create" class="btn btn-primary">Add Project</a>
+}
 
 <table class="table mt-3">
     <tr>
@@ -15,8 +18,12 @@
         <tr>
             <td>@item.Title</td>
             <td>
-                <a href="/Project/Edit/@item.Id">Edit</a> |
-                <a href="/Project/Delete/@item.Id">Delete</a>
+                <a href="/Project/Details/@item.Id">Details</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/Project/Edit/@item.Id">Edit</a>
+                    <a href="/Project/Delete/@item.Id">Delete</a>
+                }
             </td>
         </tr>
     }

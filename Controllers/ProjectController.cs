@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PortfolioMVC.Data;
 using PortfolioMVC.Models;
 
@@ -19,8 +20,15 @@ namespace PortfolioMVC.Controllers
             var projects = _context.Projects.ToList();
             return View(projects);
         }
+        // DETAILS
+        public IActionResult Details(int id)
+        {
+            var project = _context.Projects.Find(id);
+            return View(project);
+        }
 
         // CREATE (GET)
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -28,6 +36,7 @@ namespace PortfolioMVC.Controllers
 
         // CREATE (POST)
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(Project project)
         {
             _context.Projects.Add(project);
@@ -35,6 +44,7 @@ namespace PortfolioMVC.Controllers
             return RedirectToAction("Index");
         }
         // EDIT (GET)
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             var project = _context.Projects.Find(id);
@@ -43,6 +53,7 @@ namespace PortfolioMVC.Controllers
 
         // EDIT (POST)
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Project project)
         {
             _context.Projects.Update(project);
@@ -50,6 +61,7 @@ namespace PortfolioMVC.Controllers
             return RedirectToAction("Index");
         }
         // DELETE (GET)
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             var project = _context.Projects.Find(id);
@@ -57,7 +69,9 @@ namespace PortfolioMVC.Controllers
         }
 
         // DELETE (POST)
+        
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteConfirmed(int id)
         {
             var project = _context.Projects.Find(id);
@@ -65,11 +79,6 @@ namespace PortfolioMVC.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        // DETAILS
-        public IActionResult Details(int id)
-        {
-            var project = _context.Projects.Find(id);
-            return View(project);
-        }
+       
     }
 }
