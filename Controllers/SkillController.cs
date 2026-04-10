@@ -28,48 +28,52 @@ public class SkillController : Controller
     [Authorize(Roles = "Admin")]
     public IActionResult Create()
     {
-        return View();
+        return PartialView("_Create");
     }
-   
+
     [HttpPost]
-    [Authorize(Roles = "Admin")]
     public IActionResult Create(Skill skill)
     {
         _context.Skills.Add(skill);
         _context.SaveChanges();
-        return RedirectToAction("Index");
+        return Ok();
     }
 
     // EDIT
     [Authorize(Roles = "Admin")]
     public IActionResult Edit(int id)
     {
-        return View(_context.Skills.Find(id));
+        var skill = _context.Skills.Find(id);
+        return PartialView("_Edit", skill);
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
     public IActionResult Edit(Skill skill)
     {
         _context.Skills.Update(skill);
         _context.SaveChanges();
-        return RedirectToAction("Index");
+        return Ok();
     }
 
     // DELETE
     [Authorize(Roles = "Admin")]
     public IActionResult Delete(int id)
     {
-        return View(_context.Skills.Find(id));
+        var skill = _context.Skills.Find(id);
+        return PartialView("_Delete", skill);
     }
 
     [HttpPost, ActionName("Delete")]
-    [Authorize(Roles = "Admin")]
     public IActionResult DeleteConfirmed(int id)
     {
         var data = _context.Skills.Find(id);
         _context.Skills.Remove(data);
         _context.SaveChanges();
-        return RedirectToAction("Index");
+        return Ok();
     }
+
+
+
+
+
 }

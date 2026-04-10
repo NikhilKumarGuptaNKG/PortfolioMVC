@@ -1,11 +1,53 @@
 ﻿@model PortfolioMVC.Models.Experience
+<style>
+    .about-card {
+        transition: all 0.3s ease;
+    }
 
-<h2>Experience Details</h2>
+        .about-card:hover {
+            transform: translateY(-5px);
+        }</style>
+<div class="row justify-content-center">
+    <div class="col-md-8">
 
-<div>
-    <h4>@Model.Role - @Model.Company</h4>
-    <p>@Model.DateRange</p>
-    <p>@Model.Description</p>
+        <div class="about-card p-4">
+
+            <h3 class="fw-bold mb-2">
+                @Model.Role
+            </h3>
+
+            <p class="text-info fw-semibold mb-1">
+                @Model.Company
+            </p>
+
+            <small class="text-muted">
+                <i class="bi bi-calendar"></i> @Model.DateRange
+            </small>
+
+            <hr />
+
+            <h5 class="fw-semibold">Description</h5>
+            <p class="mt-2">
+                @Model.Description
+            </p>
+
+            <div class="mt-4 d-flex justify-content-between">
+
+                <a href="javascript:history.back()" class="btn btn-outline-light">
+                    ← Back
+                </a>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.Id"
+                       class="btn btn-warning">
+                        Edit
+                    </a>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
 </div>
-
-<a asp-action="Index">Back</a>

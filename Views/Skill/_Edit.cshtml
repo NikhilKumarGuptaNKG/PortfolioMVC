@@ -1,0 +1,26 @@
+﻿@model PortfolioMVC.Models.Skill
+@{
+    Layout = null;
+}
+<form id="editForm">
+    <div class="mb-3">
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div class="mb-3">
+            <label>Skill Name</label>
+            <input name="Name" value="@Model.Name" class="form-control" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-warning">Update</button>
+</form>
+
+<script>
+    $('#editForm').submit(function (e) {
+        e.preventDefault();
+
+        $.post('/Skill/Edit', $(this).serialize(), function () {
+            location.reload(); // refresh page
+        });
+    });
+</script>

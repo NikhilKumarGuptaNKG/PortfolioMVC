@@ -34,21 +34,6 @@
     <a href="#projects" class="btn btn-primary mt-3 px-4">View Projects</a>
 </section>
 
-<!-- SKILLS -->
-<section class="mt-5">
-    <h2 class="section-title">Skills</h2>
-
-    <div class="row mt-4">
-        @foreach (var skill in Model.Skills)
-        {
-            <div class="col-md-3 col-6 mb-3">
-                <div class="about-card text-center p-3">
-                    <p class="mt-2 mb-0 fw-semibold">@skill.Name</p>
-                </div>
-            </div>
-        }
-    </div>
-</section>
 
 <!-- EXPERIENCE -->
 <section class="mt-5">
@@ -56,12 +41,68 @@
 
     @foreach (var exp in Model.Experiences)
     {
-        <div class="about-card mb-3">
+        <div class="about-card mb-3" style="cursor:pointer" onclick="window.location.href='/Experience/Details/@exp.Id'">
             <h5 class="fw-bold">@exp.Role - @exp.Company</h5>
             <small class="text-muted">@exp.DateRange</small>
             <p class="mt-2">@exp.Description</p>
         </div>
     }
+</section>
+
+<!-- SKILLS -->
+<section class="mt-5" id="skills">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title mb-0">Skills</h2>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-primary" onclick="openCreate()">
+                <i class="bi bi-plus-circle"></i> Add Skill
+            </a>
+        }
+    </div>
+
+   @*  <h2 class="section-title">Skills</h2> *@
+
+    <div class="row mt-4">
+        @foreach (var skill in Model.Skills)
+        {
+            <div class="col-md-3 col-6 mb-3">
+                <div class="about-card text-center p-3"
+                     style="cursor:pointer"
+                     onclick="window.location.href='/Skill/Details/@skill.Id'">
+
+                    <p class="mt-2 mb-0 fw-semibold">@skill.Name</p>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="mt-3 d-flex justify-content-center gap-2">
+
+                            <!-- Details button (optional now) -->
+                            <a asp-controller="Skill" asp-action="Details" asp-route-id="@skill.Id"
+                               class="btn btn-sm btn-outline-light"
+                               onclick="event.stopPropagation();">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <!-- Edit -->
+                            <button class="btn btn-sm btn-warning"
+                                    onclick="event.stopPropagation(); openEdit(@skill.Id)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+
+                            <!-- Delete -->
+                            <button class="btn btn-sm btn-danger"
+                                    onclick="event.stopPropagation(); openDelete(@skill.Id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
 </section>
 
 <!-- PROJECTS -->
@@ -114,16 +155,48 @@
     </div>
 </section>
 
-<!-- CONTACT -->
-<section class="mt-5 mb-5 text-center">
-    <h2 class="section-title">Contact</h2>
+@* skill Modal for Create, Edit, and Delete *@
+<div class="modal fade" id="skillModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-    <div class="mt-3">
-        <p><i class="bi bi-envelope"></i> @Model.Contact?.Email</p>
-        <p><i class="bi bi-telephone"></i> @Model.Contact?.Phone</p>
-        <p>
-            <i class="bi bi-linkedin"></i>
-            <a href="@Model.Contact?.LinkedIn" target="_blank">LinkedIn Profile</a>
-        </p>
+            <div class="modal-header">
+                <h5 class="modal-title">Skill</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content will load here -->
+            </div>
+
+        </div>
     </div>
-</section>
+</div>
+<script>
+    function openCreate() {
+        $.get('/Skill/Create', function (data) {
+            $('#modalBody').html(data);
+
+            var modal = new bootstrap.Modal(document.getElementById('skillModal'));
+            modal.show();
+        });
+    }
+
+    function openEdit(id) {
+        $.get('/Skill/Edit/' + id, function (data) {
+            $('#modalBody').html(data);
+
+            var modal = new bootstrap.Modal(document.getElementById('skillModal'));
+            modal.show();
+        });
+    }
+
+    function openDelete(id) {
+        $.get('/Skill/Delete/' + id, function (data) {
+            $('#modalBody').html(data);
+
+            var modal = new bootstrap.Modal(document.getElementById('skillModal'));
+            modal.show();
+        });
+    }
+</script>

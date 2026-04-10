@@ -1,0 +1,22 @@
+﻿@model PortfolioMVC.Models.Skill
+@{
+    Layout = null;
+}
+<form id="createForm">
+    <div class="mb-3">
+        <label>Skill Name</label>
+        <input name="Name" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+
+<script>
+    $('#createForm').submit(function (e) {
+        e.preventDefault();
+
+        $.post('/Skill/Create', $(this).serialize(), function () {
+            location.reload(); // refresh page
+        });
+    });
+</script>

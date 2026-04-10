@@ -4,28 +4,121 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>Log in</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #121212, #1e1e2f);
+    }
 
-<form method="post">
-    <div class="mb-3">
-        <label asp-for="Input.Email" class="form-label"></label>
-        <input asp-for="Input.Email" class="form-control" />
-        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    .login-card {
+        background: linear-gradient(145deg, #1e1e2f, #2a2a3d);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .custom-input {
+        background-color: #2a2a3d;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 8px;
+    }
+
+        .custom-input:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.15rem rgba(13,110,253,.25);
+            background-color: #2a2a3d;
+            color: #fff;
+        }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .divider {
+        border-top: 1px solid #444;
+        margin: 20px 0;
+    }
+
+    .extra-links a {
+        text-decoration: none;
+    }
+
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height:80vh;">
+    <div class="col-md-4">
+
+        <div class="login-card">
+
+            <!-- TITLE -->
+            <h3 class="text-center fw-bold mb-4">
+                <i class="bi bi-person-circle"></i> Login
+            </h3>
+
+            <!-- FORM -->
+            <form method="post">
+
+                <div class="mb-3">
+                    <label asp-for="Input.Email" class="form-label"></label>
+                    <input asp-for="Input.Email"
+                           class="form-control custom-input"
+                           placeholder="Enter your email" />
+                    <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <input asp-for="Input.Password"
+                           type="password"
+                           class="form-control custom-input"
+                           placeholder="Enter your password" />
+                    <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="Input.RememberMe" class="form-check-input" />
+                    <label asp-for="Input.RememberMe" class="form-check-label"></label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-box-arrow-in-right"></i> Log in
+                </button>
+
+            </form>
+
+            <!-- DIVIDER -->
+            <div class="divider"></div>
+
+            <!-- EXTRA LINKS -->
+            <div class="text-center extra-links">
+
+                <p class="mb-1 text-light">Don’t have an account?</p>
+
+                <a asp-page="./Register" class="text-info fw-semibold">
+                    Create one
+                </a>
+
+                <div class="mt-2">
+                    <a asp-page="./ForgotPassword" class="text-secondary">
+                        Forgot your password?
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Input.Password" class="form-label"></label>
-        <input asp-for="Input.Password" class="form-control" />
-        <span asp-validation-for="Input.Password" class="text-danger"></span>
-    </div>
-
-    <div class="form-check mb-3">
-        <input asp-for="Input.RememberMe" class="form-check-input" />
-        <label asp-for="Input.RememberMe" class="form-check-label"></label>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Log in</button>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

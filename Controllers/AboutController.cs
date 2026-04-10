@@ -61,28 +61,4 @@ public class AboutController : Controller
         _context.SaveChanges();
         return RedirectToAction("Index");
     }
-    [HttpPost]
-    [Authorize(Roles = "Admin")]
-    public IActionResult AddEducation(Education edu)
-    {
-        _context.Educations.Add(edu);
-        _context.SaveChanges();
-        return RedirectToAction("Index");
-    }
-    [HttpPost]
-    [Authorize(Roles = "Admin")]
-    public IActionResult EditEducation(Education edu)
-    {
-        _context.Educations.Update(edu);
-        _context.SaveChanges();
-        return RedirectToAction("Index");
-    }
-    [Authorize(Roles = "Admin")]
-    public IActionResult DeleteEducation(int id)
-    {
-        var data = _context.Educations.Find(id);
-        _context.Educations.Remove(data);
-        _context.SaveChanges();
-        return RedirectToAction("Index");
-    }
 }

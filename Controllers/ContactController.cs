@@ -17,7 +17,8 @@ namespace PortfolioMVC.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Contacts.ToList());
+            var about = _context.Contacts.FirstOrDefault();
+            return View(about);
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
@@ -40,12 +41,11 @@ namespace PortfolioMVC.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public IActionResult Edit(Contact c)
+        public IActionResult Edit([FromBody] Contact contact)
         {
-            _context.Contacts.Update(c);
+            _context.Contacts.Update(contact);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
