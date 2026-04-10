@@ -1,0 +1,52 @@
+﻿@model PortfolioMVC.Models.Skill
+<style>
+    /* Center card nicely */
+    .about-card {
+        transition: 0.3s ease;
+    }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+        }
+
+    /* Better text contrast */
+    .text-muted {
+        color: #adb5bd !important;
+    }</style>
+<section class="mt-5 text-center">
+
+    <!-- TITLE -->
+    <h2 class="fw-bold">
+        Mastering <span class="text-info">@Model.Name</span>
+    </h2>
+
+    <p class="text-muted mt-2">
+        Building strong expertise through continuous learning and real-world projects.
+    </p>
+
+    <!-- CARD -->
+    <div class="about-card p-4 mt-4 mx-auto" style="max-width: 500px;">
+
+        <i class="bi bi-lightbulb fs-1 text-warning"></i>
+
+        <h4 class="mt-3 fw-semibold">@Model.Name</h4>
+
+        <p class="mt-3">
+            Currently enhancing my proficiency in <b>@Model.Name</b> by working on practical implementations,
+            exploring best practices, and building scalable solutions.
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="text-info mb-0">
+            🚀 Consistent learning leads to mastery.
+        </p>
+
+    </div>
+
+    <!-- BACK BUTTON -->
+    <a href="/Skill" class="btn btn-outline-light mt-4 px-4">
+        <i class="bi bi-arrow-left"></i> Back to Skills
+    </a>
+
+</section>

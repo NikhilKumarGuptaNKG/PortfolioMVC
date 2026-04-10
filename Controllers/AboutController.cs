@@ -15,7 +15,8 @@ public class AboutController : Controller
 
     public IActionResult Index()
     {
-        return View(_context.Abouts.ToList());
+        var about = _context.Abouts.FirstOrDefault();
+        return View(about);
     }
     [Authorize(Roles = "Admin")]
     public IActionResult Create()
@@ -57,6 +58,30 @@ public class AboutController : Controller
     {
         var data = _context.Abouts.Find(id);
         _context.Abouts.Remove(data);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public IActionResult AddEducation(Education edu)
+    {
+        _context.Educations.Add(edu);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public IActionResult EditEducation(Education edu)
+    {
+        _context.Educations.Update(edu);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    [Authorize(Roles = "Admin")]
+    public IActionResult DeleteEducation(int id)
+    {
+        var data = _context.Educations.Find(id);
+        _context.Educations.Remove(data);
         _context.SaveChanges();
         return RedirectToAction("Index");
     }

@@ -1,25 +1,89 @@
-﻿@model List<PortfolioMVC.Models.About>
+﻿@model PortfolioMVC.Models.About
+<style>
+    /* About Section */
 
-<h2>Strength List</h2>
-
-<a asp-action="Create" class="btn btn-primary">Add New</a>
-
-<table class="table">
-    <tr>
-        <th>Title</th>
-        <th>Content</th>
-        <th>Action</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Title</td>
-            <td>@item.Content</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    .about-card {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
     }
-</table>
+
+        .about-card:hover {
+            transform: translateY(-6px);
+        }
+
+    .section-title {
+        border-left: 4px solid #4dabf7;
+        padding-left: 10px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .icon {
+        margin-right: 8px;
+        color: #4dabf7;
+    }
+</style>
+<section class="mt-5">
+
+    <!-- HERO -->
+    <div class="about-card text-center p-4 mb-4">
+        <h2 class="fw-bold">@Model.Title</h2>
+        <p class="mt-2">@Model.Content</p>
+    </div>
+
+    <!-- INFO GRID -->
+    <div class="row g-3">
+
+        <div class="col-md-6">
+            <div class="about-card h-100">
+                <h6 class="section-title">
+                    <i class="bi bi-building icon"></i> Company
+                </h6>
+                <p class="mb-0">@Model.Company</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="about-card h-100">
+                <h6 class="section-title">
+                    <i class="bi bi-geo-alt icon"></i> Location
+                </h6>
+                <p class="mb-0">@Model.WorkLocation</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="about-card h-100">
+                <h6 class="section-title">
+                    <i class="bi bi-person-workspace icon"></i> Role
+                </h6>
+                <p class="mb-0">@Model.Role</p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="about-card h-100">
+                <h6 class="section-title">
+                    <i class="bi bi-cpu icon"></i> Domain
+                </h6>
+                <p class="mb-0">@Model.Overview</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ADMIN ACTION -->
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="text-end mt-4">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning px-4">
+                <i class="bi bi-pencil-square"></i> Edit Profile
+            </a>
+        </div>
+    }
+
+</section>

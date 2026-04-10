@@ -11,5 +11,6 @@ namespace PortfolioMVC.ViewModels
         public List<Skill> Skills { get; set; } = new();
         public List<Strength> Strengths { get; set; } = new();
         public Contact? Contact { get; set; }
+        public List<Education> Educations { get; set; } = new();
     }
 }

@@ -17,5 +17,6 @@ namespace PortfolioMVC.Data
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Strength> Strengths { get; set; }
+        public DbSet<Education> Educations { get; set; }
     }
 }

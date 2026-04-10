@@ -27,7 +27,8 @@ namespace PortfolioMVC.Controllers
                 Strengths = _context.Strengths.ToList(),
                 Contact = _context.Contacts.FirstOrDefault(),
                 Skills = _context.Skills.ToList(),
-                Projects = _context.Projects.ToList()
+                Projects = _context.Projects.ToList(),
+                Educations = _context.Educations.OrderBy(x => x.Order).ToList()
             };
 
             return View(vm);

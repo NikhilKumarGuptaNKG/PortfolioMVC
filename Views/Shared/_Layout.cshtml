@@ -3,32 +3,103 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PortfolioMVC</title>
+    <title>@ViewData["Title"] - Nikhil Gupta</title>
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-       
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="/">Nikhil Gupta</a>
-            <div>
-                <a class="nav-link d-inline text-white" href="#about">About</a>
-                <a class="nav-link d-inline text-white" href="#skills">Skills</a>
-                <a class="nav-link d-inline text-white" asp-controller="Experience" asp-action="Index">Experience</a>
-                <a class="nav-link d-inline text-white" asp-controller="Project" asp-action="Index">Projects</a>
-                <a class="nav-link d-inline text-white" asp-controller="Strength" asp-action="Index">Strengths</a>
-                <a class="nav-link d-inline text-white" href="#contact">Contact</a>
+
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="bi bi-code-slash"></i> Nikhil Gupta
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                <ul class="navbar-nav align-items-center gap-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="About" asp-action="Index">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Skill" asp-action="Index">Skills</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Experience" asp-action="Index">Experience</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Project" asp-action="Index">Projects</a>
+                    </li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-warning fw-semibold" asp-controller="Strength" asp-action="Index">
+                                Strengths
+                            </a>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Contact" asp-action="Index">Contact</a>
+                    </li>
+
+                    <li class="nav-item ms-3">
+                        <partial name="_LoginPartial" />
+                    </li>
+
+                </ul>
             </div>
-            <partial name="_LoginPartial" />
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <!-- MAIN CONTENT -->
+    <main class="container py-5">
         @RenderBody()
-    </div>
+    </main>
 
-    <footer class="text-center mt-5 p-3 bg-light">
-        © 2026 Nikhil Gupta
+    <!-- FOOTER -->
+    <footer class="bg-dark text-light mt-5 pt-4 pb-3">
+        <div class="container text-center">
+
+            <h5 class="fw-semibold">Nikhil Gupta</h5>
+            <p class="text-muted mb-2">ASP.NET Developer | Full Stack Learner</p>
+
+            <div class="mb-3">
+                <a href="#" class="text-light mx-2"><i class="bi bi-github"></i></a>
+                <a href="#" class="text-light mx-2"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="text-light mx-2"><i class="bi bi-envelope"></i></a>
+            </div>
+
+            <small class="text-muted">
+                © 2026 Nikhil Gupta. All Rights Reserved.
+            </small>
+
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
