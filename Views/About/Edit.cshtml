@@ -1,0 +1,15 @@
+﻿@model PortfolioMVC.Models.About
+
+<form method="post">
+    <div class="mb-2">
+        <label>Title</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Content</label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-success">Update</button>
+</form>

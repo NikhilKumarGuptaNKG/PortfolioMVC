@@ -1,0 +1,30 @@
+﻿@model PortfolioMVC.Models.Experience
+
+<form method="post">
+    <div class="mb-2">
+        <label>Role</label>
+        <input asp-for="Role" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Company</label>
+        <input asp-for="Company" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Description</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Date Range</label>
+        <input asp-for="DateRange" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Order</label>
+        <input asp-for="Order" class="form-control" />
+    </div>
+
+    <button class="btn btn-success">Save</button>
+</form>

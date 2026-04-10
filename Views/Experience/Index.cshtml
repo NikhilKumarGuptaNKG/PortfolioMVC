@@ -1,0 +1,35 @@
+﻿@model List<PortfolioMVC.Models.Experience>
+
+<h2>Experience List</h2>
+ @if (User.IsInRole("Admin"))
+{
+    <a asp-action="Create" class="btn btn-primary mb-2">Add New</a>
+
+}
+
+
+<table class="table">
+    <tr>
+        <th>Role</th>
+        <th>Company</th>
+        <th>Order</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Role</td>
+            <td>@item.Company</td>
+            <td>@item.Order</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
+            </td>
+        </tr>
+    }
+</table>

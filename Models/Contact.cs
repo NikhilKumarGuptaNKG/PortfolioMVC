@@ -7,5 +7,7 @@ namespace PortfolioMVC.Models
         public string Phone { get; set; } = string.Empty;
         public string LinkedIn { get; set; } = string.Empty;
         public string PortfolioUrl { get; set; } = string.Empty;
+        public string CurrentAdd { get; set; } = string.Empty;
+        public string ParmanentAdd { get; set; } = string.Empty;
     }
 }
