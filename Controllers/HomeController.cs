@@ -20,6 +20,12 @@ namespace PortfolioMVC.Controllers
         {
             var vm = new HomeViewModel
             {
+                About = _context.Abouts.FirstOrDefault(),
+                Experiences = _context.Experiences
+                                    .OrderBy(x => x.Order)
+                                    .ToList(),
+                Strengths = _context.Strengths.ToList(),
+                Contact = _context.Contacts.FirstOrDefault(),
                 Skills = _context.Skills.ToList(),
                 Projects = _context.Projects.ToList()
             };

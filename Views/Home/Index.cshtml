@@ -8,14 +8,10 @@
         transition: 0.3s;
     }
 </style>
-<section class="text-center p-5 bg-dark text-white">
-    <h1>Hello, I'm Nikhil Gupta</h1>
-    <p>Full Stack .NET Developer</p>
-</section>
 
-<section id="about" class="mt-5">
-    <h2>About Me</h2>
-    <p>I am a Full Stack Developer working on ASP.NET, WCF, and SQL.</p>
+<section id="about" class="text-center p-5 bg-dark text-white">
+    <h2>@Model.About?.Title</h2>
+    <p>@Model.About?.Content</p>
 </section>
 
 <section id="skills" class="mt-5">
@@ -31,7 +27,18 @@
         }
     </div>
 </section>
+<section id="experience" class="mt-5">
+    <h2>Experience</h2>
 
+    @foreach (var exp in Model.Experiences)
+    {
+        <div class="card mb-3 p-3 shadow-sm">
+            <h5>@exp.Role - @exp.Company</h5>
+            <small>@exp.DateRange</small>
+            <p>@exp.Description</p>
+        </div>
+    }
+</section>
 <section id="projects" class="mt-5">
     <h2>Projects</h2>
     <div class="row">
@@ -49,8 +56,20 @@
         }
     </div>
 </section>
+<section id="strengths" class="mt-5">
+    <h2>Strengths</h2>
 
+    <ul>
+        @foreach (var s in Model.Strengths)
+        {
+            <li>@s.Title</li>
+        }
+    </ul>
+</section>
 <section id="contact" class="mt-5 mb-5">
     <h2>Contact</h2>
-    <p>Email: nikhilkumarguptankg0657@gmail.com</p>
+
+    <p>Email: @Model.Contact?.Email</p>
+    <p>Phone: @Model.Contact?.Phone</p>
+    <p>LinkedIn: <a href="@Model.Contact?.LinkedIn" target="_blank">Profile</a></p>
 </section>

@@ -12,5 +12,10 @@ namespace PortfolioMVC.Data
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<Skill> Skills { get; set; }
+
+        public DbSet<About> Abouts { get; set; }
+        public DbSet<Experience> Experiences { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Strength> Strengths { get; set; }
     }
 }

@@ -1,10 +1,15 @@
-﻿using PortfolioMVC.Models;
+﻿using System.Collections.Generic;
+using PortfolioMVC.Models;
 
 namespace PortfolioMVC.ViewModels
 {
     public class HomeViewModel
     {
-        public List<Project> Projects { get; set; }
-        public List<Skill> Skills { get; set; }
+        public About? About { get; set; }
+        public List<Experience> Experiences { get; set; } = new();
+        public List<Project> Projects { get; set; } = new();
+        public List<Skill> Skills { get; set; } = new();
+        public List<Strength> Strengths { get; set; } = new();
+        public Contact? Contact { get; set; }
     }
 }
