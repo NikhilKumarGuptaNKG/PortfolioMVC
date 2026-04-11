@@ -1,4 +1,5 @@
 ﻿@model PortfolioMVC.Models.Project
+
 <style>
     .custom-input {
         background-color: #2a2a3d;
@@ -12,6 +13,11 @@
             background-color: #2a2a3d;
             color: #fff;
         }
+
+    .section-title {
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
 </style>
 
 <div class="container mt-5">
@@ -24,38 +30,50 @@
 
         <!-- TITLE -->
         <div class="mb-3">
-            <label class="form-label">Project Title</label>
-            <input asp-for="Title" class="form-control" />
+            <label class="form-label section-title">Project Title</label>
+            <input asp-for="Title" class="form-control custom-input" />
         </div>
 
-        <!-- OVERVIEW -->
+        <!-- DESCRIPTION (Purpose / Overview) -->
         <div class="mb-3">
-            <label class="form-label">Overview</label>
-            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <label class="form-label section-title">Description</label>
+            <textarea asp-for="Description" class="form-control custom-input" rows="3"></textarea>
         </div>
 
         <!-- ARCHITECTURE -->
         <div class="mb-3">
-            <label class="form-label">Architecture</label>
-            <textarea asp-for="Architecture" class="form-control" rows="4"></textarea>
+            <label class="form-label section-title">Architecture</label>
+            <textarea asp-for="Architecture" class="form-control custom-input" rows="4"></textarea>
         </div>
 
-        <!-- CONTRIBUTION -->
+        <!-- MY ROLE -->
         <div class="mb-3">
-            <label class="form-label">Contribution</label>
-            <textarea asp-for="Contribution" class="form-control" rows="4"></textarea>
+            <label class="form-label section-title">My Role</label>
+            <input asp-for="MyRole" class="form-control custom-input" />
         </div>
 
         <!-- TECHNOLOGIES -->
         <div class="mb-3">
-            <label class="form-label">Technologies</label>
-            <input asp-for="Technologies" class="form-control" />
+            <label class="form-label section-title">Technologies</label>
+            <input asp-for="Technologies" class="form-control custom-input" />
         </div>
 
-        <!-- IMAGE URL -->
+        <!-- CONTRIBUTION -->
         <div class="mb-3">
-            <label class="form-label">Upload Images</label>
-            <input type="file" name="Images" multiple class="form-control" />
+            <label class="form-label section-title">Contribution</label>
+            <textarea asp-for="Contribution" class="form-control custom-input" rows="4"></textarea>
+        </div>
+
+        <!-- OUTCOME -->
+        <div class="mb-3">
+            <label class="form-label section-title">Outcome</label>
+            <textarea asp-for="Outcome" class="form-control custom-input" rows="3"></textarea>
+        </div>
+
+        <!-- IMAGE UPLOAD -->
+        <div class="mb-3">
+            <label class="form-label section-title">Upload Images</label>
+            <input type="file" asp-for="Images" multiple class="form-control custom-input" />
         </div>
 
         <!-- BUTTONS -->

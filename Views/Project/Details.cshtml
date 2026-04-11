@@ -1,4 +1,5 @@
 ﻿@model PortfolioMVC.Models.Project
+
 <style>
     .carousel-item img {
         border-radius: 12px;
@@ -83,40 +84,92 @@
     .carousel-control-next-icon {
         display: none;
     }
+
+    .section-box {
+        background: rgba(255,255,255,0.05);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .text-muted-light {
+        color: #cbd5e1;
+    }
+
+    .badge {
+       /*  background: linear-gradient(135deg, #4dabf7, #228be6); */
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+    }
+
+    .image-wrapper {
+        box-shadow: 0 0 25px rgba(77, 171, 247, 0.2);
+    }
+
+    .section-title {
+        margin-top: 25px;
+    }
 </style>
-<div class="container mt-5">
+
+<div class="container mt-2">
 
     <div class="about-card p-4">
 
         <!-- TITLE -->
         <h2 class="fw-bold mb-3">@Model.Title</h2>
 
-        <!-- OVERVIEW -->
-        <h5 class="section-title">🔥 Blast Furnace Overview</h5>
-        <p>@Model.Description</p>
+        <!-- DESCRIPTION -->
+        <h5 class="section-title"> Description:</h5>
+        <div class="section-box text-muted-light">
+            @Model.Description
+        </div>
 
         <!-- ARCHITECTURE -->
-        <h5 class="section-title mt-4">🏗️ Project Architecture</h5>
-        <pre class="text-light">@Model.Architecture</pre>
+        <h5 class="section-title">Architecture:</h5>
+        <div class="section-box text-muted-light">
+            @Html.Raw(Model.Architecture?.Replace("\n", "<br/>"))
+        </div>
 
-        <!-- CONTRIBUTION -->
-        <h5 class="section-title mt-4">💻 My Contribution</h5>
-        <pre class="text-light">@Model.Contribution</pre>
+        <!-- MY ROLE -->
+        <h5 class="section-title"> My Role:</h5>
+        <div class="section-box text-muted-light">
+            @Model.MyRole
+        </div>
 
         <!-- TECHNOLOGIES -->
-        <h5 class="section-title mt-4">⚙️ Technologies</h5>
-        <p class="text-info">@Model.Technologies</p>
+        <h5 class="section-title">Technologies:</h5>
+        <div class="section-box">
+            @foreach (var tech in Model.Technologies?.Split(',') ?? new string[] { })
+            {
+                <span class="badge fw-semibold me-1">@tech.Trim()</span>
+            }
+        </div>
+
+        <!-- CONTRIBUTION -->
+        <h5 class="section-title">Contribution:</h5>
+        <div class="section-box text-muted-light">
+            @Html.Raw(Model.Contribution?.Replace("\n", "<br/>"))
+        </div>
+
+        <!-- OUTCOME -->
+        <h5 class="section-title">Outcome:</h5>
+        <div class="section-box text-muted-light">
+            @Model.Outcome
+        </div>
 
         <!-- IMAGES -->
-        <h5 class="section-title mt-4">📸 Project Screenshots</h5>
+        <h5 class="section-title">Project Screenshots:</h5>
 
         @{
-            var images = Model.ImageUrls?.Split(',');
+            var images = Model.ImageUrls?.Split(',', StringSplitOptions.RemoveEmptyEntries);
         }
 
         @if (images != null && images.Length > 0)
         {
-            <div id="projectCarousel" class="carousel slide modern-carousel mt-4"
+            <div id="projectCarousel" class="carousel slide carousel-fade modern-carousel mt-4"
                  data-bs-ride="carousel"
                  data-bs-interval="2500"
                  data-bs-pause="false">
@@ -149,7 +202,7 @@
 
                 </div>
 
-                <!-- Modern Controls -->
+                <!-- Controls -->
                 <button class="carousel-control-prev custom-arrow" type="button"
                         data-bs-target="#projectCarousel" data-bs-slide="prev">
                     <i class="bi bi-chevron-left"></i>
@@ -182,10 +235,3 @@
     </div>
 
 </div>
-@* <script>
-    var carousel = new bootstrap.Carousel(document.getElementById('projectCarousel'), {
-        interval: 2500,
-        pause: false,
-        wrap: true
-    });
-</script> *@

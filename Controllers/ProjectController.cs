@@ -89,7 +89,9 @@ namespace PortfolioMVC.Controllers
             existingProject.Title = project.Title;
             existingProject.Description = project.Description;
             existingProject.Architecture = project.Architecture;
+            existingProject.MyRole = project.MyRole;
             existingProject.Contribution = project.Contribution;
+            existingProject.Outcome = project.Outcome;
             existingProject.Technologies = project.Technologies;
 
             var imagePaths = new List<string>();
