@@ -3,6 +3,64 @@
     ViewData["Title"] = "Home Page";
 }
 <style>
+    /* Modal Background Blur */
+    .custom-modal {
+        backdrop-filter: blur(6px);
+    }
+
+    /* Modal Container */
+    .modern-modal {
+        background: linear-gradient(145deg, #1e1e2f, #2a2a3d);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        color: #fff;
+    }
+
+        /* Header */
+        .modern-modal .modal-header {
+            padding-bottom: 0;
+        }
+
+        /* Body */
+        .modern-modal .modal-body {
+            padding-top: 10px;
+        }
+
+        /* Footer */
+        .modern-modal .modal-footer {
+            padding-top: 0;
+        }
+
+    /* Inputs */
+    .custom-input {
+        background-color: #2a2a3d;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 8px;
+    }
+
+        .custom-input:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+            background-color: #2a2a3d;
+            color: #fff;
+        }
+
+    /* Buttons */
+    .btn {
+        border-radius: 8px;
+    }
+
+    /* Modal Animation */
+    .modal.fade .modal-dialog {
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .modal.show .modal-dialog {
+        transform: translateY(0);
+    }
     /* Smooth card hover */
     .about-card {
         transition: all 0.3s ease;
@@ -127,14 +185,42 @@
 
 <!-- EDUCATION -->
 <section class="mt-5">
-    <h2 class="section-title">Education</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title mb-0">Education</h2>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <button class="btn btn-primary" onclick="openEduCreate()">
+                <i class="bi bi-plus-circle"></i> Add Education
+            </button>
+        }
+    </div>
 
     @foreach (var edu in Model.Educations)
     {
-        <div class="about-card mb-3">
+        <div class="about-card mb-3 p-3">
+
             <h5 class="fw-bold">@edu.Degree</h5>
-            <p>@edu.Institute</p>
+            <p class="mb-1">@edu.Institute</p>
             <small class="text-muted">@edu.Year</small>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="mt-2 d-flex gap-2">
+
+                    <button class="btn btn-sm btn-warning"
+                            onclick="openEduEdit(@edu.Id)">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-danger"
+                            onclick="openEduDelete(@edu.Id)">
+                        <i class="bi bi-trash"></i>
+                    </button>
+
+                </div>
+            }
+
         </div>
     }
 </section>
@@ -156,17 +242,41 @@
 </section>
 
 @* skill Modal for Create, Edit, and Delete *@
-<div class="modal fade" id="skillModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div class="modal fade custom-modal" id="skillModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modern-modal">
 
-            <div class="modal-header">
-                <h5 class="modal-title">Skill</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-semibold">
+                    <i class="bi bi-lightning-charge"></i> Skill
+                </h5>
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body" id="modalBody">
-                <!-- Dynamic content will load here -->
+                <!-- Dynamic content -->
+            </div>
+
+        </div>
+    </div>
+</div>
+@* education Modal for Create, Edit, and Delete *@
+<div class="modal fade custom-modal" id="eduModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modern-modal">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title">
+                    <i class="bi bi-mortarboard"></i> Education
+                </h5>
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body" id="eduModalBody">
             </div>
 
         </div>
@@ -197,6 +307,26 @@
 
             var modal = new bootstrap.Modal(document.getElementById('skillModal'));
             modal.show();
+        });
+    }
+     function openEduCreate() {
+        $.get('/Home/CreateEducation', function (data) {
+            $('#eduModalBody').html(data);
+            new bootstrap.Modal(document.getElementById('eduModal')).show();
+        });
+    }
+
+    function openEduEdit(id) {
+        $.get('/Home/EditEducation/' + id, function (data) {
+            $('#eduModalBody').html(data);
+            new bootstrap.Modal(document.getElementById('eduModal')).show();
+        });
+    }
+
+    function openEduDelete(id) {
+        $.get('/Home/DeleteEducation/' + id, function (data) {
+            $('#eduModalBody').html(data);
+            new bootstrap.Modal(document.getElementById('eduModal')).show();
         });
     }
 </script>
