@@ -13,49 +13,64 @@
             color: #fff;
         }
 </style>
-<div class="row justify-content-center">
-    <div class="col-md-6">
 
-        <div class="about-card p-4">
+<div class="container mt-5">
 
-            <h4 class="mb-4 text-center fw-bold">Add Project</h4>
+    <form method="post" enctype="multipart/form-data" class="about-card p-4">
 
-            <form method="post">
+        <h3 class="mb-4">
+            <i class="bi bi-plus-circle icon"></i> Add New Project
+        </h3>
 
-                <div class="mb-3">
-                    <label class="form-label">Title</label>
-                    <input asp-for="Title" class="form-control custom-input"
-                           placeholder="Project Title" />
-                </div>
+        <!-- TITLE -->
+        <div class="mb-3">
+            <label class="form-label">Project Title</label>
+            <input asp-for="Title" class="form-control" />
+        </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea asp-for="Description" class="form-control custom-input"
-                              rows="3"
-                              placeholder="Describe your project..."></textarea>
-                </div>
+        <!-- OVERVIEW -->
+        <div class="mb-3">
+            <label class="form-label">Overview</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Technologies</label>
-                    <input asp-for="Technologies" class="form-control custom-input"
-                           placeholder="e.g. ASP.NET, SQL, React" />
-                </div>
+        <!-- ARCHITECTURE -->
+        <div class="mb-3">
+            <label class="form-label">Architecture</label>
+            <textarea asp-for="Architecture" class="form-control" rows="4"></textarea>
+        </div>
 
-                <div class="d-flex justify-content-between mt-4">
+        <!-- CONTRIBUTION -->
+        <div class="mb-3">
+            <label class="form-label">Contribution</label>
+            <textarea asp-for="Contribution" class="form-control" rows="4"></textarea>
+        </div>
 
-                    <a asp-action="Index" class="btn btn-outline-light">
-                        ← Back
-                    </a>
+        <!-- TECHNOLOGIES -->
+        <div class="mb-3">
+            <label class="form-label">Technologies</label>
+            <input asp-for="Technologies" class="form-control" />
+        </div>
 
-                    <button type="submit" class="btn btn-success px-4">
-                        Save
-                    </button>
+        <!-- IMAGE URL -->
+        <div class="mb-3">
+            <label class="form-label">Upload Images</label>
+            <input type="file" name="Images" multiple class="form-control" />
+        </div>
 
-                </div>
+        <!-- BUTTONS -->
+        <div class="mt-4 d-flex justify-content-between">
 
-            </form>
+            <a href="javascript:history.back()" class="btn btn-outline-light">
+                ← Back
+            </a>
+
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-check-circle"></i> Save Project
+            </button>
 
         </div>
 
-    </div>
+    </form>
+
 </div>

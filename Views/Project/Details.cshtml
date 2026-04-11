@@ -1,43 +1,191 @@
 ﻿@model PortfolioMVC.Models.Project
+<style>
+    .carousel-item img {
+        border-radius: 12px;
+        transition: 0.3s;
+    }
 
-<div class="row justify-content-center">
-    <div class="col-md-8">
+        .carousel-item img:hover {
+            transform: scale(1.02);
+        }
 
-        <div class="about-card p-4">
+    .project-img {
+        height: 350px; /* control size */
+        object-fit: contain; /* no crop, full image visible */
+        background: #000; /* black background for empty space */
+    }
 
-            <h3 class="fw-bold mb-2">
-                @Model.Title
-            </h3>
+    /* Wrapper */
+    .modern-carousel {
+        position: relative;
+    }
 
-            <hr />
+    /* Image container */
+    .image-wrapper {
+        height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle, #1e293b, #020617);
+        border-radius: 12px;
+        overflow: hidden;
+    }
 
-            <h5 class="fw-semibold">Description</h5>
-            <p class="mt-2 text-light">
-                @Model.Description
-            </p>
+    /* Main image */
+    .main-img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform 0.4s ease;
+    }
 
-            <h5 class="fw-semibold mt-4">Technologies Used</h5>
-            <p class="text-info">
-                @Model.Technologies
-            </p>
+    .image-wrapper:hover .main-img {
+        transform: scale(1.05);
+    }
 
-            <div class="mt-4 d-flex justify-content-between">
+    /* Indicators */
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #aaa;
+    }
 
-                <a href="javascript:history.back()" class="btn btn-outline-light">
-                    ← Back
-                </a>
+    .carousel-indicators .active {
+        background-color: #4dabf7;
+    }
 
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-action="Edit" asp-route-id="@Model.Id"
-                       class="btn btn-warning">
-                        Edit
-                    </a>
-                }
+    /* Custom arrows */
+    .custom-arrow {
+        width: 45px;
+        height: 45px;
+        background: rgba(0,0,0,0.5);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+        .custom-arrow i {
+            font-size: 20px;
+            color: #fff;
+        }
+
+    .carousel-control-prev {
+        left: 10px;
+    }
+
+    .carousel-control-next {
+        right: 10px;
+    }
+
+    /* Hide default icons */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        display: none;
+    }
+</style>
+<div class="container mt-5">
+
+    <div class="about-card p-4">
+
+        <!-- TITLE -->
+        <h2 class="fw-bold mb-3">@Model.Title</h2>
+
+        <!-- OVERVIEW -->
+        <h5 class="section-title">🔥 Blast Furnace Overview</h5>
+        <p>@Model.Description</p>
+
+        <!-- ARCHITECTURE -->
+        <h5 class="section-title mt-4">🏗️ Project Architecture</h5>
+        <pre class="text-light">@Model.Architecture</pre>
+
+        <!-- CONTRIBUTION -->
+        <h5 class="section-title mt-4">💻 My Contribution</h5>
+        <pre class="text-light">@Model.Contribution</pre>
+
+        <!-- TECHNOLOGIES -->
+        <h5 class="section-title mt-4">⚙️ Technologies</h5>
+        <p class="text-info">@Model.Technologies</p>
+
+        <!-- IMAGES -->
+        <h5 class="section-title mt-4">📸 Project Screenshots</h5>
+
+        @{
+            var images = Model.ImageUrls?.Split(',');
+        }
+
+        @if (images != null && images.Length > 0)
+        {
+            <div id="projectCarousel" class="carousel slide modern-carousel mt-4"
+                 data-bs-ride="carousel"
+                 data-bs-interval="2500"
+                 data-bs-pause="false">
+
+                <!-- Indicators -->
+                <div class="carousel-indicators">
+                    @for (int i = 0; i < images.Length; i++)
+                    {
+                        <button type="button"
+                                data-bs-target="#projectCarousel"
+                                data-bs-slide-to="@i"
+                                class="@(i == 0 ? "active" : "")">
+                        </button>
+                    }
+                </div>
+
+                <!-- Slides -->
+                <div class="carousel-inner">
+
+                    @for (int i = 0; i < images.Length; i++)
+                    {
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+
+                            <div class="image-wrapper">
+                                <img src="@images[i]" class="main-img" />
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+                <!-- Modern Controls -->
+                <button class="carousel-control-prev custom-arrow" type="button"
+                        data-bs-target="#projectCarousel" data-bs-slide="prev">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <button class="carousel-control-next custom-arrow" type="button"
+                        data-bs-target="#projectCarousel" data-bs-slide="next">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
 
             </div>
+        }
+
+        <!-- BUTTONS -->
+        <div class="mt-4 d-flex justify-content-between">
+
+            <a href="javascript:history.back()" class="btn btn-outline-light">
+                ← Back
+            </a>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                    Edit
+                </a>
+            }
 
         </div>
 
     </div>
+
 </div>
+@* <script>
+    var carousel = new bootstrap.Carousel(document.getElementById('projectCarousel'), {
+        interval: 2500,
+        pause: false,
+        wrap: true
+    });
+</script> *@

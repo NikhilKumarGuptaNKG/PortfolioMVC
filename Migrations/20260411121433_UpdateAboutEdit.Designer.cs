@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortfolioMVC.Data;
 
@@ -10,9 +11,11 @@ using PortfolioMVC.Data;
 namespace PortfolioMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260411121433_UpdateAboutEdit")]
+    partial class UpdateAboutEdit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -224,10 +227,6 @@ namespace PortfolioMVC.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Overview")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ResumeUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

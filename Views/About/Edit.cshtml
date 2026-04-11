@@ -45,7 +45,7 @@
         }</style>
 <section class="mt-5">
 
-    <form method="post" class="about-card p-4">
+    <form method="post" class="about-card p-4" enctype="multipart/form-data">
 
         <input type="hidden" asp-for="Id" />
 
@@ -95,6 +95,20 @@
             <label class="form-label">Industrial Overview</label>
             <textarea asp-for="Overview" class="form-control" rows="3"></textarea>
         </div>
+        <!-- Resume -->
+        <div class="mb-3">
+            <label class="form-label">Upload Resume (PDF)</label>
+            <input type="file" asp-for="ResumeFile" class="form-control" accept=".pdf" />
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ResumeUrl))
+        {
+            <div class="mb-3">
+                <a href="@Model.ResumeUrl" target="_blank" class="btn btn-outline-info">
+                    <i class="bi bi-file-earmark-pdf"></i> View Current Resume
+                </a>
+            </div>
+        }
 
         <!-- ACTIONS -->
         <div class="d-flex justify-content-between mt-4">
@@ -108,7 +122,7 @@
             </button>
 
         </div>
-
+       
     </form>
 
 </section>

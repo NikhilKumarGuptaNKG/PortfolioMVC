@@ -37,10 +37,34 @@ namespace PortfolioMVC.Controllers
         // CREATE (POST)
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult Create(Project project)
+        public async Task<IActionResult> Create(Project project)
         {
+            if (project.Images != null && project.Images.Count > 0)
+            {
+                var imagePaths = new List<string>();
+
+                foreach (var file in project.Images)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+
+                        imagePaths.Add("/images/" + fileName);
+                    }
+                }
+
+                project.ImageUrls = string.Join(",", imagePaths);
+            }
+
             _context.Projects.Add(project);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
         // EDIT (GET)
@@ -54,10 +78,49 @@ namespace PortfolioMVC.Controllers
         // EDIT (POST)
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult Edit(Project project)
+        public async Task<IActionResult> Edit(Project project)
         {
-            _context.Projects.Update(project);
+            var existingProject = _context.Projects.Find(project.Id);
+
+            if (existingProject == null)
+                return NotFound();
+
+            // Update fields
+            existingProject.Title = project.Title;
+            existingProject.Description = project.Description;
+            existingProject.Architecture = project.Architecture;
+            existingProject.Contribution = project.Contribution;
+            existingProject.Technologies = project.Technologies;
+
+            var imagePaths = new List<string>();
+
+            // ✅ Use only remaining images (after removal)
+            if (!string.IsNullOrEmpty(project.RemainingImages))
+            {
+                imagePaths.AddRange(project.RemainingImages.Split(','));
+            }
+
+            // ✅ Add new images
+            if (project.Images != null && project.Images.Count > 0)
+            {
+                foreach (var file in project.Images)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    imagePaths.Add("/images/" + fileName);
+                }
+            }
+
+            existingProject.ImageUrls = string.Join(",", imagePaths);
+
             _context.SaveChanges();
+
             return RedirectToAction("Index");
         }
         // DELETE (GET)

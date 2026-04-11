@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PortfolioMVC.Models
 {
     public class About
@@ -12,5 +14,10 @@ namespace PortfolioMVC.Models
 
         public string Role { get; set; } = string.Empty;
         public string Overview { get; set; } = string.Empty;
+
+        public string ResumeUrl { get; set; }   // saved path
+
+        [NotMapped]
+        public IFormFile ResumeFile { get; set; } // upload
     }
 }

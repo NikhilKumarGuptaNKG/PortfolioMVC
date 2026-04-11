@@ -40,10 +40,45 @@ public class AboutController : Controller
 
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    public IActionResult Edit(About about)
+    public async Task<IActionResult> Edit(About about)
     {
-        _context.Abouts.Update(about);
+        var existing = _context.Abouts.Find(about.Id);
+
+        if (existing == null)
+            return NotFound();
+
+        // Update fields
+        existing.Title = about.Title;
+        existing.Content = about.Content;
+        existing.Company = about.Company;
+        existing.WorkLocation = about.WorkLocation;
+        existing.Role = about.Role;
+        existing.Overview = about.Overview;
+
+        // HANDLE RESUME UPLOAD
+        if (about.ResumeFile != null && about.ResumeFile.Length > 0)
+        {
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Files");
+
+            // ✅ Ensure folder exists
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var fileName = "resume_" + Guid.NewGuid() + Path.GetExtension(about.ResumeFile.FileName);
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await about.ResumeFile.CopyToAsync(stream);
+            }
+
+            existing.ResumeUrl = "/Files/" + fileName;
+        }
+
         _context.SaveChanges();
+
         return RedirectToAction("Index");
     }
     [Authorize(Roles = "Admin")]
