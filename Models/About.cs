@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PortfolioMVC.Models
 {
@@ -14,10 +14,16 @@ namespace PortfolioMVC.Models
 
         public string Role { get; set; } = string.Empty;
         public string Overview { get; set; } = string.Empty;
-
-        public string ResumeUrl { get; set; }   // saved path
+        public string ResumeUrl { get; set; }
+        public string ProfileImageUrl { get; set; }
+        public string CoverImageUrl { get; set; }
 
         [NotMapped]
-        public IFormFile ResumeFile { get; set; } // upload
+        public IFormFile ResumeFile { get; set; } 
+
+        [NotMapped]
+        public IFormFile CoverImageFile { get; set; }
+        [NotMapped]
+        public IFormFile ProfileImageFile { get; set; } 
     }
 }
