@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioMVC.Data;
 using PortfolioMVC.Models;
@@ -14,24 +14,45 @@ namespace PortfolioMVC.Controllers
         public HomeController(AppDbContext context)
         {
             _context = context;
+            InsertHeroSection();
         }
 
         public IActionResult Index()
         {
             var vm = new HomeViewModel
             {
+                Hero = _context.HeroSections.FirstOrDefault(), 
+
                 About = _context.Abouts.FirstOrDefault(),
-                Experiences = _context.Experiences
-                                    .OrderBy(x => x.Order)
-                                    .ToList(),
+                Experiences = _context.Experiences.OrderBy(x => x.Order).ToList(),
                 Strengths = _context.Strengths.ToList(),
                 Contact = _context.Contacts.FirstOrDefault(),
                 Skills = _context.Skills.ToList(),
                 Projects = _context.Projects.ToList(),
                 Educations = _context.Educations.OrderBy(x => x.Order).ToList()
             };
-
+            
             return View(vm);
+        }
+        public void InsertHeroSection()
+        {
+            var obj = _context.HeroSections.FirstOrDefault();
+
+            if (obj == null) // ✅ correct check
+            {
+                _context.HeroSections.Add(new HeroSection
+                {
+                    Name = "Nikhil Gupta",
+                    Role = "ASP.NET Developer",
+                    Company = "Napasoft",
+                    CurrentAddress = "Bengaluru",
+
+                    ProfileImageUrl = "/images/profile/NikhilKumarGupta_Resume_09Apr2026.pdf", // ✅ FIXED
+                    CoverImageUrl = "/images/profile/NikhilKumarGupta_Resume_09Apr2026.pdf"        // ✅ FIXED
+                });
+
+                _context.SaveChanges();
+            }
         }
 
         public IActionResult Privacy()

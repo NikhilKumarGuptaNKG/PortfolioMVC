@@ -146,84 +146,77 @@
     }
     /* HERO */
     .hero {
-        margin-top: 20px;
+        position: relative;
     }
 
     /* COVER */
     .hero-cover {
-        height: 420px;
-        background-size: auto;
-        background-position: left;
-        /* background-size: cover;
-        background-position: center; */
+        height: 260px;
+        background-size: cover;
+        background-position: center;
         border-radius: 12px;
         position: relative;
-        display: flex;
-        align-items: flex-end;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.5);
     }
 
-    /* OVERLAY (important for readability) */
+    /* OVERLAY */
     .hero-overlay {
         position: absolute;
         inset: 0;
         border-radius: 12px;
-        background: linear-gradient( to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2) );
+        background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
     }
 
-    /* CONTENT */
-    .hero-content {
-        position: relative;
-        z-index: 2;
-    }
-
-    /* AVATAR */
-    .hero-avatar {
-        width: 90px;
-        height: 90px;
+    /* EDIT BUTTON */
+    .hero-edit-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
         border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #fff;
     }
 
-    /* TEXT BLOCK */
-    .text-block {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    /* Better spacing */
-    .hero-name {
-        font-size: 24px;
-        margin-bottom: 2px;
-    }
-
-    .hero-role {
-        font-size: 14px;
-        color: #4dabf7;
-    }
-
-
-    .hero-desc {
-        color: #e2e8f0;
-        font-size: 14px;
-        /* max-width: 700px; */
-    }
-
-    .blur-box {
-        background: rgba(20,20,30,0.65);
-        backdrop-filter: blur(8px);
+    /* MAIN BOX */
+    .hero-main-box {
+        background: rgba(20,20,30,0.9);
         border-radius: 12px;
-        padding: 15px 20px;
-    }
-    /* Top box (profile + name) */
-    .hero-top-box {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+        padding: 20px;
+        margin-top: -60px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        position: relative;
     }
 
+    /* PROFILE WRAPPER */
+    .profile-wrapper {
+        position: relative;
+    }
+
+    /* PROFILE IMAGE */
+    .hero-avatar-overlap {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        border: 5px solid #fff;
+        object-fit: cover;
+        margin-top: -80px; /* 🔥 KEY */
+        background: #000;
+    }
+
+
+    /* MOBILE FIX */
     @@media (max-width: 768px) {
+        .hero-main-box
+
+    {
+        text-align: center;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .text-md-end {
+        text-align: center !important;
+    }
+
         .hero-content .d-flex {
             justify-content: center !important;
             text-align: center;
@@ -232,57 +225,83 @@
         .text-block {
             align-items: center;
         }
+
     }
+
 </style>
-<!--Hero Section-->
+<!-- HERO SECTION -->
 <section class="hero">
 
+    <!-- COVER -->
     <div class="hero-cover"
-         style="background-image:url('@Model.About?.CoverImageUrl')">
+         style="background-image:url('@Model.Hero?.CoverImageUrl')">
 
-        <!-- DARK GRADIENT (for readability) -->
         <div class="hero-overlay"></div>
 
-        <!-- CONTENT (BOTTOM) -->
-        <div class="hero-content container">
+        @if (User.IsInRole("Admin"))
+        {
+            <button class="btn btn-light btn-sm hero-edit-btn"
+                    onclick="openHeroEdit()">
+                <i class="bi bi-pencil"></i>
+            </button>
+        }
+    </div>
 
-            <div class="row align-items-end">
-                <div class="col-md-12 blur-box hero-top-box">
-                    <div class="text-center mt-2">
-                        <div class="d-flex align-items-center gap-3 flex-wrap justify-content-center">
+    <!-- CONTENT -->
+    <div class="container hero-main-box">
 
-                            <!-- PROFILE -->
-                            @if (!string.IsNullOrEmpty(Model.About?.ProfileImageUrl))
-                            {
-                                <img src="@Model.About.ProfileImageUrl" class="hero-avatar" />
-                            }
+        <!-- PROFILE IMAGE -->
+        <div class="profile-wrapper">
+            <img src="@Model.Hero?.ProfileImageUrl"
+                 class="hero-avatar-overlap" />
+        </div>
 
-                            <!-- TEXT (RIGHT SIDE) -->
-                            <div class="text-block">
-                                <h2 class="hero-name mb-0">Nikhil Gupta</h2>
-                                <p class="hero-role mb-0">ASP.NET Developer | Full Stack Learner</p>
-                            </div>
+        <!-- TEXT CONTENT BELOW IMAGE -->
+        <div class="row mt-3">
 
-                        </div>
-                    </div>
-                    
-                    <p class="hero-desc">
-                        @Model.About?.Content
-                    </p>
-                    <div class="text-center mt-2">
-                        <a href="#projects" class="btn btn-primary btn-sm">
-                            🚀 View Projects
-                        </a>
-                    </div>
-                </div>
+            <!-- NAME FULL WIDTH -->
+            <div class="col-12">
+                <h2 class="mb-2">@Model.Hero?.Name</h2>
             </div>
+
+            <!-- LEFT: ROLE + ADDRESS -->
+            <div class="col-md-8">
+
+                <p class="text-primary mb-1">
+                    @Model.Hero?.Role
+                </p>
+            </div>
+            <!-- RIGHT: COMPANY (NOW ALIGNED WITH ROLE) -->
+            <div class="col-md-4 text-md-end">
+
+                <strong>@Model.Hero?.Company</strong><br />
+
+                <small class="text-muted">
+                    @Model.Hero?.CompanyAddress
+                </small>
+
+            </div>
+            <div class="col-md-12"><div>
+                    <p class="text-muted mb-1">
+                        📍 @Model.Hero?.CurrentAddress
+                    </p>
+                    <a class="text-info small" asp-controller="Contact" asp-action="Index">Contact Info</a>
+            </div>
+
+           
 
         </div>
 
     </div>
-
+    </div>
 </section>
-
+<!--About Section-->
+<section class="mt-5">
+    <h2 class="section-title">About</h2>
+    <div class="about-card mb-3" style="cursor:pointer" onclick="window.location.href='/About'">
+        <p class="mt-2">@Model.About?.Content</p>
+    </div>
+</section>
 <!-- EXPERIENCE -->
 <section class="mt-5">
     <h2 class="section-title">Experience</h2>
@@ -296,62 +315,48 @@
         </div>
     }
 </section>
-
-<!-- SKILLS -->
-<section class="mt-5" id="skills">
+<!-- EDUCATION -->
+<section class="mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="section-title mb-0">Skills</h2>
+        <h2 class="section-title mb-0">Education</h2>
 
         @if (User.IsInRole("Admin"))
         {
-            <a class="btn btn-primary" onclick="openCreate()">
-                <i class="bi bi-plus-circle"></i> Add Skill
-            </a>
+            <button class="btn btn-primary" onclick="openEduCreate()">
+                <i class="bi bi-plus-circle"></i> Add Education
+            </button>
         }
     </div>
 
-   @*  <h2 class="section-title">Skills</h2> *@
+    @foreach (var edu in Model.Educations)
+    {
+        <div class="about-card mb-3 exp-card">
 
-    <div class="row mt-4">
-        @foreach (var skill in Model.Skills)
-        {
-            <div class="col-md-3 col-6 mb-3">
-                <div class="about-card text-center p-3"
-                     style="cursor:pointer"
-                     onclick="window.location.href='/Skill/Details/@skill.Id'">
+            <h5 class="fw-bold">@edu.Degree</h5>
+            <p class="mb-1">@edu.Institute</p>
+            <small class="text-muted">@edu.Year</small>
 
-                    <p class="mt-2 mb-0 fw-semibold">@skill.Name</p>
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="mt-2 d-flex gap-2">
 
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <div class="mt-3 d-flex justify-content-center gap-2">
+                    <button class="btn btn-sm btn-warning"
+                            onclick="openEduEdit(@edu.Id)">
+                        <i class="bi bi-pencil"></i>
+                    </button>
 
-                            <!-- Details button (optional now) -->
-                            <a asp-controller="Skill" asp-action="Details" asp-route-id="@skill.Id"
-                               class="btn btn-sm btn-outline-light"
-                               onclick="event.stopPropagation();">
-                                <i class="bi bi-eye"></i>
-                            </a>
+                    <button class="btn btn-sm btn-danger"
+                            onclick="openEduDelete(@edu.Id)">
+                        <i class="bi bi-trash"></i>
+                    </button>
 
-                            <!-- Edit -->
-                            <button class="btn btn-sm btn-warning"
-                                    onclick="event.stopPropagation(); openEdit(@skill.Id)">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-
-                            <!-- Delete -->
-                            <button class="btn btn-sm btn-danger"
-                                    onclick="event.stopPropagation(); openDelete(@skill.Id)">
-                                <i class="bi bi-trash"></i>
-                            </button>
-
-                        </div>
-                    }
                 </div>
-            </div>
-        }
-    </div>
+            }
+
+        </div>
+    }
 </section>
+
 <!--Projects Section-->
 <section id="projects" class="mt-5">
     <h2 class="section-title">Projects</h2>
@@ -423,48 +428,62 @@
         }
     </div>
 </section>
-
-<!-- EDUCATION -->
-<section class="mt-5">
+<!-- SKILLS -->
+<section class="mt-5" id="skills">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="section-title mb-0">Education</h2>
+        <h2 class="section-title mb-0">Skills</h2>
 
         @if (User.IsInRole("Admin"))
         {
-            <button class="btn btn-primary" onclick="openEduCreate()">
-                <i class="bi bi-plus-circle"></i> Add Education
-            </button>
+            <a class="btn btn-primary" onclick="openCreate()">
+                <i class="bi bi-plus-circle"></i> Add Skill
+            </a>
         }
     </div>
 
-    @foreach (var edu in Model.Educations)
-    {
-        <div class="about-card mb-3 exp-card">
+    @*  <h2 class="section-title">Skills</h2> *@
 
-            <h5 class="fw-bold">@edu.Degree</h5>
-            <p class="mb-1">@edu.Institute</p>
-            <small class="text-muted">@edu.Year</small>
+    <div class="row mt-4">
+        @foreach (var skill in Model.Skills)
+        {
+            <div class="col-md-3 col-6 mb-3">
+                <div class="about-card text-center p-3"
+                     style="cursor:pointer"
+                     onclick="window.location.href='/Skill/Details/@skill.Id'">
 
-            @if (User.IsInRole("Admin"))
-            {
-                <div class="mt-2 d-flex gap-2">
+                    <p class="mt-2 mb-0 fw-semibold">@skill.Name</p>
 
-                    <button class="btn btn-sm btn-warning"
-                            onclick="openEduEdit(@edu.Id)">
-                        <i class="bi bi-pencil"></i>
-                    </button>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="mt-3 d-flex justify-content-center gap-2">
 
-                    <button class="btn btn-sm btn-danger"
-                            onclick="openEduDelete(@edu.Id)">
-                        <i class="bi bi-trash"></i>
-                    </button>
+                            <!-- Details button (optional now) -->
+                            <a asp-controller="Skill" asp-action="Details" asp-route-id="@skill.Id"
+                               class="btn btn-sm btn-outline-light"
+                               onclick="event.stopPropagation();">
+                                <i class="bi bi-eye"></i>
+                            </a>
 
+                            <!-- Edit -->
+                            <button class="btn btn-sm btn-warning"
+                                    onclick="event.stopPropagation(); openEdit(@skill.Id)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+
+                            <!-- Delete -->
+                            <button class="btn btn-sm btn-danger"
+                                    onclick="event.stopPropagation(); openDelete(@skill.Id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                        </div>
+                    }
                 </div>
-            }
-
-        </div>
-    }
+            </div>
+        }
+    </div>
 </section>
+
 
 <!-- STRENGTHS -->
 <section class="mt-5">
@@ -568,6 +587,13 @@
         $.get('/Home/DeleteEducation/' + id, function (data) {
             $('#eduModalBody').html(data);
             new bootstrap.Modal(document.getElementById('eduModal')).show();
+        });
+    }
+
+    function openHeroEdit() {
+        $.get('/Hero/Edit', function (data) {
+            $('#modalBody').html(data);
+            new bootstrap.Modal(document.getElementById('skillModal')).show();
         });
     }
 </script>

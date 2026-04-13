@@ -109,29 +109,7 @@
                 </a>
             </div>
         }
-        <!--Profile Image -->
-        <div class="mb-3">
-            <label class="form-label">Upload Profile Image</label>
-            <input type="file" asp-for="ProfileImageFile" class="form-control" accept="image/*" />
-        </div>
-
-        @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
-        {
-            <div class="mb-3">
-                <img src="@Model.ProfileImageUrl"
-                     style="height:120px; border-radius:50%; object-fit:cover;" />
-            </div>
-        }
-        <!--Cover Image -->
-        <div class="mb-3">
-            <label class="form-label">Upload Cover Image</label>
-            <input type="file" asp-for="CoverImageFile" class="form-control" accept="image/*" />
-        </div>
-
-        @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
-        {
-            <img src="@Model.CoverImageUrl" class="img-fluid rounded mb-3" />
-        }
+       
         <!-- ACTIONS -->
         <div class="d-flex justify-content-between mt-4">
 

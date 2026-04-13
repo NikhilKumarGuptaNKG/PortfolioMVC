@@ -1,0 +1,91 @@
+﻿@model PortfolioMVC.Models.HeroSection
+
+<form id="heroForm" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row g-3">
+
+        <!-- NAME -->
+        <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input asp-for="Name" class="form-control custom-input" />
+        </div>
+
+        <!-- ROLE -->
+        <div class="col-md-6">
+            <label class="form-label">Role</label>
+            <input asp-for="Role" class="form-control custom-input" />
+        </div>
+        <!-- ADDRESS -->
+        <div class="col-md-6">
+            <label class="form-label">Current Address</label>
+            <input asp-for="CurrentAddress" class="form-control custom-input" />
+        </div>
+        <!-- COMPANY -->
+        <div class="col-md-6">
+            <label class="form-label">Company</label>
+            <input asp-for="Company" class="form-control custom-input" />
+        </div>
+
+        <!-- PROFILE IMAGE -->
+        <div class="col-md-6">
+            <label class="form-label">Profile Image</label>
+            <input type="file" asp-for="ProfileImageFile" class="form-control custom-input" onchange="previewProfile(event)" />
+
+            <img id="profilePreview"
+                 src="@Model.ProfileImageUrl"
+                 class="mt-2"
+                 style="width:80px;height:80px;border-radius:50%;object-fit:cover;" />
+        </div>
+
+        <!-- COVER IMAGE -->
+        <div class="col-md-6">
+            <label class="form-label">Cover Image</label>
+            <input type="file" asp-for="CoverImageFile" class="form-control custom-input" onchange="previewCover(event)" />
+
+            <img id="coverPreview"
+                 src="@Model.CoverImageUrl"
+                 class="mt-2"
+                 style="width:100%;height:120px;object-fit:cover;border-radius:8px;" />
+        </div>
+
+    </div>
+
+    <!-- SAVE -->
+    <div class="mt-4 text-end">
+        <button type="button" class="btn btn-success" onclick="saveHero()">
+            💾 Save
+        </button>
+    </div>
+
+</form>
+
+<script>
+    function previewProfile(event) {
+        document.getElementById("profilePreview").src =
+            URL.createObjectURL(event.target.files[0]);
+    }
+
+    function previewCover(event) {
+        document.getElementById("coverPreview").src =
+            URL.createObjectURL(event.target.files[0]);
+    }
+
+    function saveHero() {
+
+        var form = document.getElementById("heroForm");
+        var formData = new FormData(form);
+
+        $.ajax({
+            url: '/Hero/Edit',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+</script>

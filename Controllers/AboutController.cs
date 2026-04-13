@@ -76,47 +76,6 @@ public class AboutController : Controller
 
             existing.ResumeUrl = "/Files/" + fileName;
         }
-        // HANDLE PROFILE IMAGE UPLOAD
-        if (about.ProfileImageFile != null && about.ProfileImageFile.Length > 0)
-        {
-            var folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "profile");
-
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
-
-            var fileName = "profile_" + Guid.NewGuid() + Path.GetExtension(about.ProfileImageFile.FileName);
-            var filePath = Path.Combine(folder, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await about.ProfileImageFile.CopyToAsync(stream);
-            }
-
-            existing.ProfileImageUrl = "/images/profile/" + fileName;
-        }
-        // HANDLE COVER IMAGE
-        if (about.CoverImageFile != null && about.CoverImageFile.Length > 0)
-        {
-            var folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "cover");
-
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
-
-            var fileName = "cover_" + Guid.NewGuid() + Path.GetExtension(about.CoverImageFile.FileName);
-            var filePath = Path.Combine(folder, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await about.CoverImageFile.CopyToAsync(stream);
-            }
-
-            existing.CoverImageUrl = "/images/cover/" + fileName;
-        }
-
         _context.SaveChanges();
 
         return RedirectToAction("Index");

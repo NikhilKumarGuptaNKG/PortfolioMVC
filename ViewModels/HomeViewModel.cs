@@ -5,6 +5,7 @@ namespace PortfolioMVC.ViewModels
 {
     public class HomeViewModel
     {
+        public HeroSection? Hero { get; set; }
         public About? About { get; set; }
         public List<Experience> Experiences { get; set; } = new();
         public List<Project> Projects { get; set; } = new();
