@@ -26,12 +26,12 @@ namespace PortfolioMVC.Models
         // Final result
         public string Outcome { get; set; }
 
-        public string ImageUrls { get; set; }
+        public string? ImageUrls { get; set; }
 
         [NotMapped]
-        public List<IFormFile> Images { get; set; }
+        public List<IFormFile>? Images { get; set; }
 
         [NotMapped]
-        public string RemainingImages { get; set; }
+        public string? RemainingImages { get; set; }
     }
 }

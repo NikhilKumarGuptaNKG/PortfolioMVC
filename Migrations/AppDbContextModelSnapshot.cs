@@ -228,7 +228,6 @@ namespace PortfolioMVC.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ResumeUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Role")
@@ -354,7 +353,6 @@ namespace PortfolioMVC.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CoverImageUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CurrentAddress")
@@ -370,7 +368,6 @@ namespace PortfolioMVC.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProfileImageUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Role")
@@ -401,7 +398,6 @@ namespace PortfolioMVC.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrls")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MyRole")

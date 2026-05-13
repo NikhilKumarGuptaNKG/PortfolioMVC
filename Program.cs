@@ -89,12 +89,23 @@ using (var scope = app.Services.CreateScope())
 
     // ---------- Seed Data ----------
 
+    // ---------- Seed Data ----------
+
     if (!context.Abouts.Any())
     {
         context.Abouts.Add(new About
         {
-            Title = "Hello, I'm Nikhil Gupta",
-            Content = "I am a Full Stack Developer with experience in C#, ASP.NET, SQL, and JavaScript."
+            Title = "Nikhil Kumar Gupta",
+            Content = "Software Developer at Napasoft (Client: Tata Steel)",
+
+            Company = "Napasoft (Client: Tata Steel)",
+            WorkLocation = "Jamshedpur, Jharkhand",
+
+            Role = "Full Stack Developer",
+
+            Overview = "Curious by nature and driven by problem-solving, I started my journey in software development with a love for mathematics and logic. Over the past 3 years, I have grown into a Full Stack Developer working with C#, ASP.NET, SQL, and JavaScript to build enterprise solutions at Tata Steel.",
+
+            ResumeUrl = "/Files/Resume/resume.pdf"
         });
     }
 
@@ -107,7 +118,7 @@ using (var scope = app.Services.CreateScope())
                 Company = "Napasoft (Client: Tata Steel)",
                 DateRange = "Nov 2023 – Present",
                 Order = 1,
-                Description = "Worked on enterprise applications and real-time systems."
+                Description = "Responsible for full development lifecycle including design, development, deployment, API integration, reverse engineering legacy applications, AJAX-based UI, SVG, CanvasJS, and enterprise application development."
             },
             new Experience
             {
@@ -115,7 +126,7 @@ using (var scope = app.Services.CreateScope())
                 Company = "Napasoft",
                 DateRange = "Jan 2023 – Aug 2023",
                 Order = 2,
-                Description = "Built web and desktop applications using ASP.NET."
+                Description = "Built Master Mech billing & inventory management system using WinForms + ASP.NET MVC 5 and developed Click Booster Windows game."
             }
         );
     }
@@ -123,9 +134,10 @@ using (var scope = app.Services.CreateScope())
     if (!context.Strengths.Any())
     {
         context.Strengths.AddRange(
-            new Strength { Title = "Strong problem-solving skills" },
-            new Strength { Title = "Quick learner" },
-            new Strength { Title = "Clean coding practices" }
+            new Strength { Title = "Strong debugging & problem-solving skills" },
+            new Strength { Title = "Experience in real-time and industrial applications" },
+            new Strength { Title = "Quick learner, adaptable to new technologies" },
+            new Strength { Title = "Focused on clean coding & performance optimization" }
         );
     }
 
@@ -133,29 +145,119 @@ using (var scope = app.Services.CreateScope())
     {
         context.Contacts.Add(new Contact
         {
-            Email = "nkg@email.com",
+            Email = "nikhilkumarguptankg0657@gmail.com",
             Phone = "7903892879",
-            LinkedIn = "https://www.linkedin.com/in/nikhil-gupta-nkg/",
-            PortfolioUrl = "https://nikhil-portfolio-mvc-ezf4g5akechyh4gj.centralindia-01.azurewebsites.net"
+            LinkedIn = "https://linkedin.com/in/nikhil-gupta-nkg",
+            PortfolioUrl = "https://your-render-url.onrender.com",
+
+            CurrentAdd = "Jamshedpur, Jharkhand - 831017",
+            ParmanentAdd = "Jamshedpur, Jharkhand - 831017"
         });
     }
 
     if (!context.Projects.Any())
     {
-        context.Projects.Add(new Project
-        {
-            Title = "Sample Project",
-            Description = "Demo project for portfolio",
-            Technologies = "ASP.NET Core, SQLite"
-        });
+        context.Projects.AddRange(
+
+            new Project
+            {
+                Title = "Blast Furnace Monitoring System",
+                Description = "Real-time monitoring system for blast furnace parameters in Tata Steel.",
+                Architecture = "3-Layer Architecture using ASP.NET Web Forms + WCF + ADO.NET",
+                MyRole = "Full Stack Developer",
+                Technologies = "ASP.NET Web Forms, C#, WCF, Oracle, AJAX, CanvasJS, Highcharts, SVG",
+                Contribution = "Developed UI, Login/Signup, dynamic side navigation, AJAX real-time updates, SVG visualizations, and dashboard monitoring system.",
+                Outcome = "Improved monitoring and visualization of furnace parameters."
+            },
+
+            new Project
+            {
+                Title = "Ladle Tracking System",
+                Description = "Real-time ladle and crane tracking system for industrial monitoring.",
+                Architecture = "ASP.NET + ASMX Web Service + Oracle",
+                MyRole = "Full Stack Developer",
+                Technologies = "C#, Oracle, AJAX, jQuery, SVG, CanvasJS",
+                Contribution = "Developed SVG-based plant layout, AJAX polling, dashboards, CRUD modules, and real-time tracking visualization.",
+                Outcome = "Enabled live tracking and operational monitoring."
+            },
+
+            new Project
+            {
+                Title = "PLC Sensor Data Processor",
+                Description = "Console application for processing PLC sensor data.",
+                Architecture = "Console Application",
+                MyRole = "Backend Developer",
+                Technologies = "C#, Oracle",
+                Contribution = "Processed OPC sensor data, validated tags, and handled continuous data flow.",
+                Outcome = "Reliable sensor data processing and storage."
+            },
+
+            new Project
+            {
+                Title = "Process Monitor",
+                Description = "Windows utility to automate process execution.",
+                Architecture = "WinForms Desktop Application",
+                MyRole = "Desktop Application Developer",
+                Technologies = "C#, WinForms",
+                Contribution = "Built UI for process management and monitoring using Windows APIs.",
+                Outcome = "Automated execution and monitoring of multiple applications."
+            }
+        );
     }
 
     if (!context.Skills.Any())
     {
         context.Skills.AddRange(
+
             new Skill { Name = "C#" },
-            new Skill { Name = "ASP.NET Core" },
-            new Skill { Name = "SQL" }
+            new Skill { Name = "SQL" },
+            new Skill { Name = "JavaScript" },
+            new Skill { Name = "ASP.NET" },
+            new Skill { Name = "ASP.NET Core MVC" },
+            new Skill { Name = "Web API" },
+            new Skill { Name = "Entity Framework Core" },
+            new Skill { Name = "Identity Core" },
+            new Skill { Name = "LINQ" },
+            new Skill { Name = "WCF" },
+            new Skill { Name = "MVC 5" },
+            new Skill { Name = "WinForms" },
+            new Skill { Name = "Web Forms" },
+            new Skill { Name = "HTML5" },
+            new Skill { Name = "CSS3" },
+            new Skill { Name = "Bootstrap 5" },
+            new Skill { Name = "jQuery / AJAX" },
+            new Skill { Name = "Git / GitHub" }
+
+        );
+    }
+
+    if (!context.Educations.Any())
+    {
+        context.Educations.AddRange(
+
+            new Education
+            {
+                Degree = "B.Sc. Mathematics (Hons.)",
+                Institute = "Kolhan University",
+                Year = "2022",
+                Order = 1
+            },
+
+            new Education
+            {
+                Degree = "Higher Secondary (Science)",
+                Institute = "JAC Board",
+                Year = "2018",
+                Order = 2
+            },
+
+            new Education
+            {
+                Degree = "Matriculation",
+                Institute = "JAC Board",
+                Year = "2016",
+                Order = 3
+            }
         );
     }
 

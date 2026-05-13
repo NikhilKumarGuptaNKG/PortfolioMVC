@@ -14,11 +14,11 @@ namespace PortfolioMVC.Models
 
         public string CurrentAddress { get; set; } = string.Empty;
         public string ParmanentAddress { get; set; } = string.Empty;
-        public string ProfileImageUrl { get; set; }
-        public string CoverImageUrl { get; set; }
+        public string? ProfileImageUrl { get; set; }
+        public string? CoverImageUrl { get; set; }
         [NotMapped]
-        public IFormFile CoverImageFile { get; set; }
+        public IFormFile? CoverImageFile { get; set; }
         [NotMapped]
-        public IFormFile ProfileImageFile { get; set; }
+        public IFormFile? ProfileImageFile { get; set; }
     }
 }

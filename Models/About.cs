@@ -14,11 +14,11 @@ namespace PortfolioMVC.Models
 
         public string Role { get; set; } = string.Empty;
         public string Overview { get; set; } = string.Empty;
-        public string ResumeUrl { get; set; }
+        public string? ResumeUrl { get; set; }
        
 
         [NotMapped]
-        public IFormFile ResumeFile { get; set; } 
+        public IFormFile? ResumeFile { get; set; } 
 
     }
 }

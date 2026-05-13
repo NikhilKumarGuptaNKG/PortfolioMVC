@@ -11,7 +11,7 @@ using PortfolioMVC.Data;
 namespace PortfolioMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260411054237_InitialCreate")]
+    [Migration("20260513100035_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -230,6 +230,9 @@ namespace PortfolioMVC.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ResumeUrl")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -338,13 +341,73 @@ namespace PortfolioMVC.Migrations
                     b.ToTable("Experiences");
                 });
 
+            modelBuilder.Entity("PortfolioMVC.Models.HeroSection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Company")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CompanyAddress")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoverImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CurrentAddress")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ParmanentAddress")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfileImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HeroSections");
+                });
+
             modelBuilder.Entity("PortfolioMVC.Models.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Architecture")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Contribution")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageUrls")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MyRole")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Outcome")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -22,7 +22,8 @@ namespace PortfolioMVC.Migrations
                     Company = table.Column<string>(type: "TEXT", nullable: false),
                     WorkLocation = table.Column<string>(type: "TEXT", nullable: false),
                     Role = table.Column<string>(type: "TEXT", nullable: false),
-                    Overview = table.Column<string>(type: "TEXT", nullable: false)
+                    Overview = table.Column<string>(type: "TEXT", nullable: false),
+                    ResumeUrl = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -120,6 +121,26 @@ namespace PortfolioMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HeroSections",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Role = table.Column<string>(type: "TEXT", nullable: false),
+                    Company = table.Column<string>(type: "TEXT", nullable: false),
+                    CompanyAddress = table.Column<string>(type: "TEXT", nullable: false),
+                    CurrentAddress = table.Column<string>(type: "TEXT", nullable: false),
+                    ParmanentAddress = table.Column<string>(type: "TEXT", nullable: false),
+                    ProfileImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    CoverImageUrl = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HeroSections", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Projects",
                 columns: table => new
                 {
@@ -127,7 +148,12 @@ namespace PortfolioMVC.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Technologies = table.Column<string>(type: "TEXT", nullable: false)
+                    Architecture = table.Column<string>(type: "TEXT", nullable: false),
+                    MyRole = table.Column<string>(type: "TEXT", nullable: false),
+                    Technologies = table.Column<string>(type: "TEXT", nullable: false),
+                    Contribution = table.Column<string>(type: "TEXT", nullable: false),
+                    Outcome = table.Column<string>(type: "TEXT", nullable: false),
+                    ImageUrls = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -333,6 +359,9 @@ namespace PortfolioMVC.Migrations
 
             migrationBuilder.DropTable(
                 name: "Experiences");
+
+            migrationBuilder.DropTable(
+                name: "HeroSections");
 
             migrationBuilder.DropTable(
                 name: "Projects");
