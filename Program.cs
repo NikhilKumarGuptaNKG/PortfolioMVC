@@ -89,8 +89,6 @@ using (var scope = app.Services.CreateScope())
 
     // ---------- Seed Data ----------
 
-    // ---------- Seed Data ----------
-
     if (!context.Abouts.Any())
     {
         context.Abouts.Add(new About
