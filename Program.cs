@@ -235,7 +235,7 @@ using (var scope = app.Services.CreateScope())
             });
         }
     }
-
+    await context.SaveChangesAsync();
     //if (!context.Skills.Any())
     //{
     //}
