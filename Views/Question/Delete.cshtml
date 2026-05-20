@@ -1,0 +1,23 @@
+﻿@model PortfolioMVC.Models.Question
+
+<div class="container mt-5">
+
+    <h3 class="text-danger">
+        Delete Question?
+    </h3>
+
+    <p class="mt-4">
+        @Model.QuestionText
+    </p>
+
+    <form asp-action="Delete">
+
+        <input type="hidden" asp-for="Id" />
+
+        <button class="btn btn-danger">
+            Delete
+        </button>
+
+    </form>
+
+</div>
