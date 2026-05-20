@@ -90,7 +90,6 @@
     }
 
 </style>
-
 <!-- HERO -->
 <section class="skill-hero container">
 
@@ -139,6 +138,33 @@
 
                 </div>
             }
+
+            <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center mb-4">
+
+                <!-- SEARCH -->
+                <div style="flex:1; min-width:250px;">
+
+                    <input type="text"
+                           id="questionSearch"
+                           class="form-control bg-dark text-light border-secondary"
+                           placeholder="Search interview questions..." />
+
+                </div>
+
+                <!-- ADMIN TOGGLE -->
+                @if (User.IsInRole("Admin"))
+                {
+                    <button class="btn btn-outline-info"
+                            type="button"
+                            onclick="toggleAdminActions()">
+
+                        <i class="bi bi-gear"></i>
+                        Toggle Admin Controls
+
+                    </button>
+                }
+
+            </div>
             <div class="accordion" id="questionAccordion">
 
                 @foreach (var q in Model.Questions.OrderBy(q => q.OrderNo))
@@ -152,7 +178,7 @@
                                     data-bs-toggle="collapse"
                                     data-bs-target="#question-@q.Id">
 
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center w-100">
 
                                     <span class="question-number">
                                         Q @q.OrderNo
@@ -161,7 +187,32 @@
                                     <span class="fw-semibold">
                                         @q.QuestionText
                                     </span>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <div class="ms-auto me-4 d-none admin-actions">
 
+                                            <a asp-controller="Question"
+                                               asp-action="Edit"
+                                               asp-route-id="@q.Id"
+                                               class="btn btn-sm btn-warning me-2"
+                                               onclick="event.stopPropagation();">
+
+                                                <i class="bi bi-pencil"></i>
+
+                                            </a>
+
+                                            <a asp-controller="Question"
+                                               asp-action="Delete"
+                                               asp-route-id="@q.Id"
+                                               class="btn btn-sm btn-danger"
+                                               onclick="event.stopPropagation();">
+
+                                                <i class="bi bi-trash"></i>
+
+                                            </a>
+
+                                        </div>
+                                    }
                                 </div>
 
                             </button>
@@ -174,37 +225,18 @@
 
                             <div class="accordion-body">
 
-                                @q.AnswerText
+                                <pre class="mb-0 text-light"
+                                     style="white-space: pre-wrap; font-family: inherit;">
+
+        @q.AnswerText
+
+            </pre>
 
                             </div>
 
                         </div>
 
                     </div>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <div class="ms-auto me-3 d-flex gap-2">
-
-                            <a asp-controller="Question"
-                               asp-action="Edit"
-                               asp-route-id="@q.Id"
-                               class="btn btn-sm btn-warning">
-
-                                <i class="bi bi-pencil"></i>
-
-                            </a>
-
-                            <a asp-controller="Question"
-                               asp-action="Delete"
-                               asp-route-id="@q.Id"
-                               class="btn btn-sm btn-danger">
-
-                                <i class="bi bi-trash"></i>
-
-                            </a>
-
-                        </div>
-                    }
                 }
 
             </div>
@@ -213,3 +245,35 @@
 
     </section>
 }
+
+<script>
+
+    // SEARCH FILTER
+    document.getElementById("questionSearch")
+        .addEventListener("keyup", function () {
+
+            let value = this.value.toLowerCase();
+
+            document.querySelectorAll(".accordion-item")
+                .forEach(item => {
+
+                    let text = item.innerText.toLowerCase();
+
+                    item.style.display =
+                        text.includes(value)
+                        ? ""
+                        : "none";
+                });
+        });
+
+    // TOGGLE ADMIN CONTROLS
+    function toggleAdminActions() {
+
+        document.querySelectorAll(".admin-actions")
+            .forEach(el => {
+
+                el.classList.toggle("d-none");
+            });
+    }
+
+</script>

@@ -228,30 +228,391 @@ using (var scope = app.Services.CreateScope())
 
         );
     }
+
     if (!context.Questions.Any())
     {
-        var csharpSkill = context.Skills.FirstOrDefault(s => s.Name == "C#");
+        var interviewSkill = context.Skills
+            .FirstOrDefault(s => s.Name == "Interview");
 
-        if (csharpSkill != null)
+        if (interviewSkill != null)
         {
             context.Questions.AddRange(
 
                 new Question
                 {
-                    QuestionText = "What is OOP?",
-                    AnswerText = "OOP stands for Object-Oriented Programming.",
+                    QuestionText = "Where are you from?",
+                    AnswerText = @"
+• I belong from Jharkhand and currently living in Jamshedpur.
+• I was in Bengaluru in April to explore some opportunities 
+and also for some work related to my higher studies.",
+
                     OrderNo = 1,
-                    SkillId = csharpSkill.Id
+                    SkillId = interviewSkill.Id
                 },
 
                 new Question
                 {
-                    QuestionText = "What is Encapsulation?",
-                    AnswerText = "Encapsulation means wrapping data and methods into a single unit.",
-                    OrderNo = 2,
-                    SkillId = csharpSkill.Id
-                }
+                    QuestionText = "Tell me about yourself?",
+                    AnswerText = @"
+• Name/ Place/ Education
+My name is Nikhil Kumar Gupta. 
+I am from Jamshedpur, Jharkhand. 
+I completed my B.Sc. in Mathematics Honours. 
 
+• Current Work
+Currently, I am working as a Junior Software Developer at Tata Steel client side through Napasoft. 
+
+• Experience with Skills
+I have around 3 years of experience with C#, ASP.NET, MVC, SQL, JavaScript, AJAX, HTML, CSS, Bootstrap, and related tech. 
+
+• Passion
+I am passionate about learning new technologies and improving my skills.
+
+• Goal
+My goal is to build a strong career in software development, keep growing professionally, and become an SME (Subject Matter Expert) in the next five years.",
+
+                    OrderNo = 2,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "What do you mean by SME?",
+                    AnswerText = @"
+• SME means a person who is an expert in a specific domain or technology. 
+• They can solve technical problems. 
+• They can guide the team. 
+• They can suggest the best solutions. 
+• And they have a good understanding of the business and processes.",
+
+                    OrderNo = 3,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "Tell me about your family?",
+                    AnswerText = @"
+• There are four members in my family.
+• My father is a businessman. And my mother is a homemaker. 
+• I also have a younger brother.
+• My family is very supportive in my career and studies.
+• Their support helps me stay motivated and positive.",
+
+                    OrderNo = 4,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "Tell me about your company?",
+                    AnswerText = @"
+• Currently, I am working through Napasoft for the client Tata Steel. 
+• My company works on software development and industrial application solutions. 
+• We develop and maintain applications that help improve monitoring, automation, and operational processes. 
+• I mainly work on technologies like C#, ASP.NET, SQL, JavaScript, and related web technologies.",
+
+                    OrderNo = 5,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "Tell me about your role?",
+                    AnswerText = @"
+• Currently, I am working as a Junior Software Developer. 
+• My responsibilities include application development, maintenance, debugging, and feature enhancement. 
+• I work on both frontend and backend development using technologies such as C#, ASP.NET, ASP.NET Core, SQL, JavaScript, HTML, CSS, and Bootstrap. 
+• I also interact with databases, write SQL queries, and support application performance improvements.",
+
+                    OrderNo = 6,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "Tell me about your projects?",
+                    AnswerText = @"
+I have worked on multiple industrial and web-based applications during my experience as a software developer. The major projects I worked on are:
+
+• Blast Furnace Monitoring System 
+• Ladle Tracking System 
+• Personal Portfolio Project
+
+These projects helped me improve both my technical skills and problem-solving abilities, especially in industrial monitoring and real-time application development.",
+
+                    OrderNo = 7,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "What are you currently doing?",
+                    AnswerText = @"
+• Currently, I am working as a Junior Software Developer at Tata Steel client side through Napasoft. 
+• My work involves application development, maintenance, real-time monitoring systems, and feature enhancement using technologies like C#, ASP.NET, SQL, JavaScript, and ASP.NET Core. 
+• Along with my job, I am also improving my skills in ASP.NET Core and modern web development.",
+
+                    OrderNo = 8,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "Why are you looking for a change?",
+                    AnswerText = @"
+• My current role has given me good exposure to industrial applications and software development. 
+• However, now I want to move toward opportunities 
+• where I can work on modern technologies, take more responsibilities, grow professionally, and enhance my skills.",
+
+                    OrderNo = 9,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "Why not continue in your current company?",
+                    AnswerText = @"
+• My current company has given me good experience in software development. 
+• I have learned a lot from my current role and projects. 
+• However, the scope of modern technologies and long-term growth opportunities is currently limited for my career goals. 
+• Now, I want to work on more modern technologies and take on more responsibilities. 
+• That is why I am looking for a change to improve my skills and grow professionally.",
+
+                    OrderNo = 10,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "What are your career goals?",
+                    AnswerText = @"
+• My career goal is to build a strong career in software development. 
+• I want to continuously improve my technical and problem-solving skills. 
+• I want to work on modern technologies and challenging projects. 
+• In the next few years, I want to become a Subject Matter Expert in software development.",
+
+                    OrderNo = 11,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "What are your strengths?",
+                    AnswerText = @"
+• My strengths are problem-solving and quick learning. 
+• I am a hardworking and self-motivated person. 
+• I like learning new technologies and improving my skills. 
+• I can adapt quickly to new environments and responsibilities. 
+• I also work well in a team and try to complete tasks on time.",
+
+                    OrderNo = 12,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "What are your weaknesses?",
+                    AnswerText = @"
+• One of my weaknesses is that I sometimes focus too much on perfection, which can take extra time. But now I am improving my time management and balancing speed with accuracy.
+• Earlier, I was not very confident in public speaking. But I am continuously improving by practicing communication and speaking more confidently.",
+
+                    OrderNo = 13,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "Why should we hire you?",
+                    AnswerText = @"
+• I believe I am a good fit for this role because I have good knowledge of software development and real project experience.
+• I am a quick learner and adaptable to new technologies.
+• I am hardworking and focused on improving my skills continuously.
+• I am confident that I can contribute to the team and handle responsibilities sincerely.",
+
+                    OrderNo = 14,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "How will you explain when someone wants modern tech and you have no experience on that?",
+                    AnswerText = @"
+• That is correct that my professional experience is mainly in ASP.NET Web Forms and industrial applications. 
+• However, I have already started learning modern technologies like ASP.NET Core, Web API, Entity Framework Core, JWT authentication, and React through self-learning and personal projects. 
+• Recently, I also built portfolio and authentication projects using ASP.NET Core technologies. 
+• I believe my current development experience and problem-solving skills will help me adapt quickly to modern tech stacks.",
+
+                    OrderNo = 15,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "Do you have experience in .NET Core and how?",
+                    AnswerText = @"
+• Most of my experience is in ASP.NET Web Forms. 
+• However, I have been actively learning and working on ASP.NET Core through self-learning and personal projects. 
+• Recently, I built a portfolio project and a JWT-based authentication project using ASP.NET Core MVC and ASP.NET Core Web API. 
+• In these projects, I worked with Entity Framework Core, Identity Framework, JWT authentication, SQLite, REST APIs, and frontend integration. 
+• Through these projects, I gained hands-on experience with modern .NET development concepts.",
+
+                    OrderNo = 16,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "What technologies have you worked on?",
+                    AnswerText = @"I have worked on .NET technologies like C#, ASP.NET, ASP.NET Core, MVC, Web API, SQL Server, JavaScript, AJAX, HTML, CSS, Bootstrap, and WCF services.",
+
+                    OrderNo = 17,
+                    SkillId = interviewSkill.Id
+                },
+
+                new Question
+{
+    QuestionText = "Can you explain all these technologies?",
+    AnswerText = @"
+C#
+• C# is an object-oriented programming language developed by Microsoft. 
+• I use it for backend development, business logic, APIs, database operations, and application development.
+
+ASP.NET Web Forms
+• ASP.NET Web Forms is a framework used to build web applications using server controls and event-driven programming. 
+• I used it in industrial monitoring projects and enterprise applications.
+
+ASP.NET Core
+• ASP.NET Core is a modern, cross-platform framework for building web applications and APIs. 
+• It is faster, lightweight, and widely used for modern application development.
+
+MVC (Model View Controller)
+• MVC is an architectural pattern that separates:
+Model → Data
+View → UI
+Controller → Business logic/request handling
+
+Web API
+• Web API is used to create RESTful services that allow applications to communicate with each other using HTTP methods like GET, POST, PUT, and DELETE.
+
+SQL Server
+• SQL Server is a relational database management system. 
+• I use it to store, retrieve, update, and manage application data using SQL queries, stored procedures, and joins.
+
+Entity Framework Core
+• EF Core is an ORM (Object Relational Mapper). 
+• It allows us to interact with databases using C# objects instead of writing too many SQL queries manually.
+
+ADO.NET
+• ADO.NET is used for direct database connectivity in .NET applications.
+
+JavaScript
+• JavaScript is a scripting language used to make web pages interactive and dynamic.
+
+AJAX
+• AJAX is used for asynchronous communication between client and server without reloading the page.
+
+HTML
+• HTML is used to create the structure of web pages.
+
+CSS
+• CSS is used for styling and designing web pages.
+
+Bootstrap
+• Bootstrap is a frontend framework used to create responsive and mobile-friendly UI designs quickly.
+
+WCF Services
+• WCF (Windows Communication Foundation) is used for communication between applications and services.
+
+SQLite
+• SQLite is a lightweight database commonly used in small and portable applications.
+
+LINQ
+• LINQ stands for Language Integrated Query.
+
+IIS Hosting
+• IIS (Internet Information Services) is a web server provided by Microsoft.
+
+Git
+• Git is a version control system used to track code changes and manage source code efficiently.
+
+GitHub
+• GitHub is a cloud-based platform used to store and manage Git repositories.
+
+Canvas & SVG
+• Canvas and SVG are used for graphical visualization and dynamic drawing in web applications.",
+
+    OrderNo = 18,
+    SkillId = interviewSkill.Id
+},
+                
+                new Question
+{
+    QuestionText = "What are your opinion on AI?",
+    AnswerText = @"
+• I believe AI is a powerful technology that is changing the software industry positively.
+• It helps improve productivity and learning.
+• However, I also believe strong programming fundamentals and problem-solving skills are still very important because AI works best when guided by skilled developers.
+• I see AI as a powerful assistant that helps developers work more efficiently rather than replacing skilled engineers completely.",
+
+    OrderNo = 19,
+    SkillId = interviewSkill.Id
+},
+                
+                new Question
+{
+    QuestionText = "How much do you know about Cloud, Azure, DevOps, and React.js?",
+    AnswerText = @"
+• I have basic knowledge of Cloud, Azure, DevOps, and React.js through self-learning and personal projects.
+• I am continuously learning these technologies because they are important for modern software development.
+
+About Azure
+• Microsoft Azure is a cloud platform provided by Microsoft.
+• I have explored application hosting and deployment concepts for ASP.NET Core applications.
+
+About DevOps
+• DevOps is a combination of Development and Operations.
+• It focuses on improving collaboration between development and deployment teams.
+
+About React.js
+• React is a JavaScript library used for building dynamic and interactive user interfaces.
+• It is component-based and widely used for modern frontend development.
+
+About Cloud
+• Cloud computing means using services over the internet instead of using only a local computer or server.",
+
+    OrderNo = 20,
+    SkillId = interviewSkill.Id
+},
+                
+                new Question
+{
+    QuestionText = "Can you have any questions regarding this?",
+    AnswerText = @"
+About Role
+• Can you please explain more about this role and daily responsibilities?
+
+About Team
+• How is the team structure for this project?
+
+About Technologies
+• What technologies and tools are mainly used in your current projects?
+
+About Learning & Growth
+• What kind of learning and growth opportunities are available in the company?
+
+About Projects
+• What type of projects will I mainly work on in this role?
+
+About Work Culture
+• How would you describe the work culture of the team?
+
+About Next Steps
+• What will be the next step in the interview process?",
+
+    OrderNo = 21,
+    SkillId = interviewSkill.Id
+}
             );
         }
     }
