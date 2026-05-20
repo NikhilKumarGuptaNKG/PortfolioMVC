@@ -202,32 +202,43 @@ using (var scope = app.Services.CreateScope())
             }
         );
     }
+    string[] skills =
+{
+    "Interview",
+    "C#",
+    "SQL",
+    "JavaScript",
+    "ASP.NET",
+    "ASP.NET Core MVC",
+    "Web API",
+    "Entity Framework Core",
+    "Identity Core",
+    "LINQ",
+    "WCF",
+    "MVC 5",
+    "WinForms",
+    "Web Forms",
+    "HTML5",
+    "CSS3",
+    "Bootstrap 5",
+    "jQuery / AJAX",
+    "Git / GitHub"
+};
 
-    if (!context.Skills.Any())
+    foreach (var skillName in skills)
     {
-        context.Skills.AddRange(
-            new Skill { Name = "Interview" },
-            new Skill { Name = "C#" },
-            new Skill { Name = "SQL" },
-            new Skill { Name = "JavaScript" },
-            new Skill { Name = "ASP.NET" },
-            new Skill { Name = "ASP.NET Core MVC" },
-            new Skill { Name = "Web API" },
-            new Skill { Name = "Entity Framework Core" },
-            new Skill { Name = "Identity Core" },
-            new Skill { Name = "LINQ" },
-            new Skill { Name = "WCF" },
-            new Skill { Name = "MVC 5" },
-            new Skill { Name = "WinForms" },
-            new Skill { Name = "Web Forms" },
-            new Skill { Name = "HTML5" },
-            new Skill { Name = "CSS3" },
-            new Skill { Name = "Bootstrap 5" },
-            new Skill { Name = "jQuery / AJAX" },
-            new Skill { Name = "Git / GitHub" }
-
-        );
+        if (!context.Skills.Any(s => s.Name == skillName))
+        {
+            context.Skills.Add(new Skill
+            {
+                Name = skillName
+            });
+        }
     }
+
+    //if (!context.Skills.Any())
+    //{
+    //}
 
     if (!context.Questions.Any())
     {
