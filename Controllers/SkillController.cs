@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PortfolioMVC.Data;
 using PortfolioMVC.Models;
 
@@ -21,7 +22,10 @@ public class SkillController : Controller
     // DETAILS
     public IActionResult Details(int id)
     {
-        var skill = _context.Skills.Find(id);
+        var skill = _context.Skills
+            .Include(s => s.Questions)
+            .FirstOrDefault(s => s.Id == id);
+
         return View(skill);
     }
     // CREATE

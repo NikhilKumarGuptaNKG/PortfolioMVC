@@ -12,7 +12,7 @@ namespace PortfolioMVC.Data
         public DbSet<HeroSection> HeroSections { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Skill> Skills { get; set; }
-
+        public DbSet<Question> Questions { get; set; }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<Contact> Contacts { get; set; }

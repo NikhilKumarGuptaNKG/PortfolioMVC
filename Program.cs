@@ -206,7 +206,7 @@ using (var scope = app.Services.CreateScope())
     if (!context.Skills.Any())
     {
         context.Skills.AddRange(
-
+            new Skill { Name = "Interview" },
             new Skill { Name = "C#" },
             new Skill { Name = "SQL" },
             new Skill { Name = "JavaScript" },
@@ -227,6 +227,33 @@ using (var scope = app.Services.CreateScope())
             new Skill { Name = "Git / GitHub" }
 
         );
+    }
+    if (!context.Questions.Any())
+    {
+        var csharpSkill = context.Skills.FirstOrDefault(s => s.Name == "C#");
+
+        if (csharpSkill != null)
+        {
+            context.Questions.AddRange(
+
+                new Question
+                {
+                    QuestionText = "What is OOP?",
+                    AnswerText = "OOP stands for Object-Oriented Programming.",
+                    OrderNo = 1,
+                    SkillId = csharpSkill.Id
+                },
+
+                new Question
+                {
+                    QuestionText = "What is Encapsulation?",
+                    AnswerText = "Encapsulation means wrapping data and methods into a single unit.",
+                    OrderNo = 2,
+                    SkillId = csharpSkill.Id
+                }
+
+            );
+        }
     }
 
     if (!context.Educations.Any())
